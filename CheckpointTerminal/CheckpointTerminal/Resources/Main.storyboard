@@ -30,7 +30,48 @@
                     <view key="view" id="Zcb-30-pmf">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyT-st-nOm">
+                                <rect key="frame" x="20" y="20" width="440" height="230"/>
+                                <clipView key="contentView" id="avv-49-qCH">
+                                    <rect key="frame" x="1" y="1" width="438" height="228"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="mjI-8m-t7l">
+                                            <rect key="frame" x="0.0" y="0.0" width="438" height="228"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="438" height="228"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="438" height="228"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="4GO-l2-ZrL">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="JkZ-wz-dS5">
+                                    <rect key="frame" x="423" y="1" width="16" height="228"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="QyT-st-nOm" firstAttribute="centerX" secondItem="Zcb-30-pmf" secondAttribute="centerX" id="1Z7-Ci-eXT"/>
+                            <constraint firstAttribute="trailing" secondItem="QyT-st-nOm" secondAttribute="trailing" constant="20" id="5ie-2t-uH4"/>
+                            <constraint firstAttribute="bottom" secondItem="QyT-st-nOm" secondAttribute="bottom" constant="20" id="7jf-30-WnS"/>
+                            <constraint firstItem="QyT-st-nOm" firstAttribute="top" secondItem="Zcb-30-pmf" secondAttribute="top" constant="20" id="Zvl-B7-Qeo"/>
+                            <constraint firstItem="QyT-st-nOm" firstAttribute="centerY" secondItem="Zcb-30-pmf" secondAttribute="centerY" id="cxB-Bq-0aG"/>
+                            <constraint firstItem="QyT-st-nOm" firstAttribute="leading" secondItem="Zcb-30-pmf" secondAttribute="leading" constant="20" id="pvX-lD-7a8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="mjI-8m-t7l" id="Qhk-ey-Tau"/>
+                    </connections>
                 </viewController>
                 <customObject id="hZn-rr-xHj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

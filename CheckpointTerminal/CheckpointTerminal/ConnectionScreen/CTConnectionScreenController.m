@@ -8,14 +8,33 @@
 
 #import "CTConnectionScreenController.h"
 
-@interface CTConnectionScreenController ()
+#import "CTArduinoService.h"
+
+@interface CTConnectionScreenController () <CTArduinoServiceObserver>
+
+@property (nonatomic) IBOutlet NSTextView *textView;
 
 @end
 
 @implementation CTConnectionScreenController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    [[CTArduinoService sharedService] connect];
+    [[CTArduinoService sharedService] subscribeForEvent:CTArduinoServiceIRCodeReceivedEvent
+                                               observer:self];
+}
+
+- (void)viewWillDisappear {
+    [super viewWillDisappear];
+    [[CTArduinoService sharedService] disconnect];
+    [[CTArduinoService sharedService] unsubscribeObserver:self
+                                                 forEvent:CTArduinoServiceIRCodeReceivedEvent];
+}
+
+#pragma mark - CTArduinoServiceObserver Methods
+
+- (void)arduinoService:(CTArduinoService *)arduinoService didSentEvent:(CTArduinoServiceEvent)event {
     
 }
 
