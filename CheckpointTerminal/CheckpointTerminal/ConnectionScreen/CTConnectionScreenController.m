@@ -34,8 +34,12 @@
 
 #pragma mark - CTArduinoServiceObserver Methods
 
-- (void)arduinoService:(CTArduinoService *)arduinoService didSentEvent:(CTArduinoServiceEvent)event {
-    
+- (void)arduinoService:(CTArduinoService *)arduinoService
+          didSentEvent:(CTArduinoServiceEvent)event
+                  data:(id)data {
+    if ([data isKindOfClass:[NSString class]]) {
+        self.textView.string = data;
+    }
 }
 
 @end

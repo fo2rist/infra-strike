@@ -21,7 +21,8 @@ typedef NS_ENUM(NSUInteger, CTArduinoServiceEvent) {
 @required
 
 - (void)arduinoService:(CTArduinoService *)arduinoService
-          didSentEvent:(CTArduinoServiceEvent)event;
+          didSentEvent:(CTArduinoServiceEvent)event
+                  data:(id)data;
 
 @end
 

@@ -62,6 +62,7 @@
         observers = [NSMutableArray array];
     }
     [observers addObject:observer];
+    [self.observersForEvents setObject:observers forKey:@(event)];
 }
 
 - (void)unsubscribeObserver:(id)observer forEvent:(CTArduinoServiceEvent)event {
@@ -77,10 +78,10 @@
 
 #pragma mark - Private Methods
 
-- (void)sentEvent:(CTArduinoServiceEvent)event {
+- (void)sentEvent:(CTArduinoServiceEvent)event data:(id)data {
     NSMutableArray *observers = [self.observersForEvents objectForKey:@(event)];
     for (id <CTArduinoServiceObserver> observer in observers) {
-        [observer arduinoService:self didSentEvent:event];
+        [observer arduinoService:self didSentEvent:event data:data];
     }
 }
 
@@ -91,17 +92,20 @@
 }
 
 - (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data {
-    NSLog(@"Port received data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    NSLog(@"%@", decodedString);
+//    NSLog(@"%@", data);
+    [self sentEvent:CTArduinoServiceIRCodeReceivedEvent data:decodedString];
 }
 
 - (void)serialPortWasOpened:(ORSSerialPort *)serialPort {
     NSLog(@"Port opened");
-    [self sentEvent:CTArduinoServicePortOpened];
+    [self sentEvent:CTArduinoServicePortOpened data:nil];
 }
 
 - (void)serialPortWasClosed:(ORSSerialPort *)serialPort {
     NSLog(@"Port closed");
-    [self sentEvent:CTArduinoServicePortClosed];
+    [self sentEvent:CTArduinoServicePortClosed data:nil];
 }
 
 @end
