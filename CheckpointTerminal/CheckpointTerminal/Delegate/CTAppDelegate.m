@@ -9,6 +9,7 @@
 #import "CTAppDelegate.h"
 
 #import "CTArduinoService.h"
+#import "CTSession.h"
 
 #import "CTConnectionScreenController.h"
 #import "CTStartGameScreenController.h"
@@ -24,6 +25,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     NSStoryboard *mainStoryboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     self.mainWindowController = [mainStoryboard instantiateControllerWithIdentifier:@"MainWindowController"];
+    if ([CTSession sharedSession])
     [self.mainWindowController showWindow:self];
 }
 

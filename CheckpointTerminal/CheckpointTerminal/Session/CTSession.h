@@ -10,4 +10,10 @@
 
 @interface CTSession : NSObject
 
+@property (nonatomic, copy) NSString *userId;
+
+@property (nonatomic, readonly, getter = isLogged) BOOL logged;
+
++ (instancetype)sharedSession;
+
 @end

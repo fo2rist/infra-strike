@@ -10,6 +10,7 @@
 #import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
 
 #import "CTConnectionScreenController.h"
+#import "CTNetworkService.h"
 
 @interface CTConnectionScreenController () <NSTextFieldDelegate>
 
