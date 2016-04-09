@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">infra-strike</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_phone">Phone</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="unable_to_login">Unable to login</string>
+
+    <!--String related to game -->
+    <string name="death_match">Death Match</string>
+    <string name="team_death_match">Team Death Match</string>
+    <string name="prompt_game_name">Game Name</string>
+    <string name="unable_to_create_game">Unable to create the game</string>
+    <string name="prompt_user_name">Your Name</string>
+    <string name="unable_to_join_game">Unable to join the game</string>
+
+</resources>
