@@ -10,4 +10,13 @@
 
 @implementation CTGame
 
++ (CTGame *)gameWithJSON:(NSDictionary *)json {
+    CTGame *game = [[CTGame alloc] init];
+    game.gameName = NilIfNull( [json objectForKey:@"name"]);
+    game.mode = NilIfNull([json objectForKey:@"mode"]);
+    game.creatorName = NilIfNull([json objectForKey:@"creatorName"]);
+    game.code = NilIfNull([json objectForKey:@"code"]);
+    return game;
+}
+
 @end

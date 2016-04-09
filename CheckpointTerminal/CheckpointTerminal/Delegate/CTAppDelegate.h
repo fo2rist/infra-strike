@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class CTGame;
+
 @interface CTAppDelegate : NSObject <NSApplicationDelegate>
 
 @property NSWindowController *mainWindowController;
@@ -16,5 +18,6 @@
 
 - (void)openRegistrationScreen;
 - (void)openStartGameScreen;
+- (void)openGameStatusScreenWithGame:(CTGame *)game;
 
 @end

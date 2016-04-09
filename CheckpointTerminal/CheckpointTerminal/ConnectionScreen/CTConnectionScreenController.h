@@ -6,8 +6,8 @@
 //  Copyright © 2016 Streetmage. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "CTBaseController.h"
 
-@interface CTConnectionScreenController : NSViewController
+@interface CTConnectionScreenController : CTBaseController
 
 @end

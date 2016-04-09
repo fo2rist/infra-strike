@@ -15,4 +15,6 @@
 @property (nonatomic, copy) NSString *creatorName;
 @property (nonatomic, copy) NSString *code;
 
++ (CTGame *)gameWithJSON:(NSDictionary *)json;
+
 @end

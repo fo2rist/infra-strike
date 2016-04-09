@@ -11,4 +11,7 @@
 
 #import "CTAppDelegate.h"
 
+#define NullIfNil(obj) obj != nil ? obj : [NSNull null]
+#define NilIfNull(obj) [obj isKindOfClass:[NSNull class]] ? nil : obj
+
 #endif

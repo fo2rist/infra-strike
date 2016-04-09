@@ -10,8 +10,12 @@
 
 #import "CTAppDelegate.h"
 #import "CTSession.h"
+#import "CTNetworkService.h"
 
 @interface CTStartGameScreenController ()
+
+@property (nonatomic, weak) IBOutlet NSTextField *userNameTextField;
+@property (nonatomic, weak) IBOutlet NSTextField *gameNameTextField;
 
 @end
 
@@ -25,7 +29,18 @@
 }
 
 - (IBAction)onPlayButtonClick:(NSButton *)sender {
-    NSLog(@"TODO: send request to start game");
+    if (self.userNameTextField.stringValue &&
+        self.gameNameTextField.stringValue) {
+        [[CTNetworkService sharedService] createNewGameWithName:self.gameNameTextField.stringValue
+                                                    creatorName:self.userNameTextField.stringValue
+                                                           mode:@"deathmatch"
+                                                           code:@"0xFFFFFF"
+                                                     completion:^(BOOL success, CTGame *game, NSError *error) {
+                                                         if (success) {
+                                                             [[CTAppDelegate sharedInstance] openGameStatusScreenWithGame:game];
+                                                         }
+                                                     }];
+    }
 }
 
 @end

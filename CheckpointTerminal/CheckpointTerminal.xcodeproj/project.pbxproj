@@ -19,6 +19,9 @@
 		5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37751CB8F2F200479F69 /* CTSession.m */; };
 		5CFE377A1CB9001A00479F69 /* CTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37791CB9001A00479F69 /* CTUser.m */; };
 		5CFE377D1CB9002400479F69 /* CTGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE377C1CB9002400479F69 /* CTGame.m */; };
+		5CFE37A21CB91D7500479F69 /* CTShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37A11CB91D7500479F69 /* CTShot.m */; };
+		5CFE37A51CB91FEC00479F69 /* CTBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37A41CB91FEC00479F69 /* CTBaseController.m */; };
+		5CFE37A91CB928FF00479F69 /* CTGameStatusScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37A71CB928FF00479F69 /* CTGameStatusScreenController.m */; };
 		69E2A8A3A15A68471210CA02 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A6EFF586C42B1303B3467 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,12 @@
 		5CFE37791CB9001A00479F69 /* CTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTUser.m; sourceTree = "<group>"; };
 		5CFE377B1CB9002400479F69 /* CTGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGame.h; sourceTree = "<group>"; };
 		5CFE377C1CB9002400479F69 /* CTGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGame.m; sourceTree = "<group>"; };
+		5CFE37A01CB91D7500479F69 /* CTShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTShot.h; sourceTree = "<group>"; };
+		5CFE37A11CB91D7500479F69 /* CTShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTShot.m; sourceTree = "<group>"; };
+		5CFE37A31CB91FEC00479F69 /* CTBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTBaseController.h; sourceTree = "<group>"; };
+		5CFE37A41CB91FEC00479F69 /* CTBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTBaseController.m; sourceTree = "<group>"; };
+		5CFE37A61CB928FF00479F69 /* CTGameStatusScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGameStatusScreenController.h; sourceTree = "<group>"; };
+		5CFE37A71CB928FF00479F69 /* CTGameStatusScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGameStatusScreenController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +146,14 @@
 		5C10A44F1CB80E0C003FE682 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5CFE37A31CB91FEC00479F69 /* CTBaseController.h */,
+				5CFE37A41CB91FEC00479F69 /* CTBaseController.m */,
 				5C10A4551CB812D9003FE682 /* CTConnectionScreenController.h */,
 				5C10A4561CB812D9003FE682 /* CTConnectionScreenController.m */,
 				5CFE376B1CB8DDA300479F69 /* CTStartGameScreenController.h */,
 				5CFE376C1CB8DDA300479F69 /* CTStartGameScreenController.m */,
+				5CFE37A61CB928FF00479F69 /* CTGameStatusScreenController.h */,
+				5CFE37A71CB928FF00479F69 /* CTGameStatusScreenController.m */,
 			);
 			name = Screens;
 			path = ConnectionScreen;
@@ -187,8 +200,10 @@
 			children = (
 				5CFE37781CB9001A00479F69 /* CTUser.h */,
 				5CFE37791CB9001A00479F69 /* CTUser.m */,
-				5CFE377C1CB9002400479F69 /* CTGame.m */,
 				5CFE377B1CB9002400479F69 /* CTGame.h */,
+				5CFE377C1CB9002400479F69 /* CTGame.m */,
+				5CFE37A01CB91D7500479F69 /* CTShot.h */,
+				5CFE37A11CB91D7500479F69 /* CTShot.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -326,9 +341,12 @@
 				5CFE376D1CB8DDA300479F69 /* CTStartGameScreenController.m in Sources */,
 				5CFE376A1CB8D91C00479F69 /* CTRepeatTimer.m in Sources */,
 				5C10A4391CB7F21F003FE682 /* main.m in Sources */,
+				5CFE37A91CB928FF00479F69 /* CTGameStatusScreenController.m in Sources */,
 				5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */,
 				5C10A44E1CB80DC1003FE682 /* CTAppDelegate.m in Sources */,
 				5C10A45B1CB819F6003FE682 /* CTArduinoService.m in Sources */,
+				5CFE37A51CB91FEC00479F69 /* CTBaseController.m in Sources */,
+				5CFE37A21CB91D7500479F69 /* CTShot.m in Sources */,
 				5CFE377A1CB9001A00479F69 /* CTUser.m in Sources */,
 				5CFE377D1CB9002400479F69 /* CTGame.m in Sources */,
 				5CFE37711CB8DDE500479F69 /* CTNetworkService.m in Sources */,

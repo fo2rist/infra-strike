@@ -13,8 +13,11 @@
 
 #import "CTConnectionScreenController.h"
 #import "CTStartGameScreenController.h"
+#import "CTGameStatusScreenController.h"
 
 @interface CTAppDelegate ()
+
+@property (nonatomic, readonly) NSStoryboard *mainStoryBoard;
 
 @end
 
@@ -24,6 +27,7 @@
     if (![CTSession sharedSession].isLogged) {
         [[CTAppDelegate sharedInstance] openRegistrationScreen];
     }
+    [CTSession sharedSession].userId = nil;
 }
 
 #pragma mark - Accessors
@@ -35,13 +39,29 @@
 #pragma mark - Public Methods
 
 - (void)openRegistrationScreen {
-    CTConnectionScreenController *connectionScreenController = [[NSStoryboard storyboardWithName:@"Main" bundle:nil]instantiateControllerWithIdentifier:@"CTConnectionScreenController"];
-    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = connectionScreenController;
+    CTConnectionScreenController *connectionScreenController = [self.mainStoryBoard instantiateControllerWithIdentifier:@"CTConnectionScreenController"];
+    [self setupContentController:connectionScreenController];
 }
 
 - (void)openStartGameScreen {
-    CTStartGameScreenController *startGameScreenController = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"CTStartGameScreenController"];
-    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = startGameScreenController;
+    CTStartGameScreenController *startGameScreenController = [self.mainStoryBoard instantiateControllerWithIdentifier:@"CTStartGameScreenController"];
+    [self setupContentController:startGameScreenController];
+}
+
+- (void)openGameStatusScreenWithGame:(CTGame *)game {
+    CTGameStatusScreenController *gameStatusScreenController = [self.mainStoryBoard instantiateControllerWithIdentifier:@"CTGameStatusScreenController"];
+    gameStatusScreenController.game = game;
+    [self setupContentController:gameStatusScreenController];
+}
+
+#pragma mark - Private Methods
+
+- (NSStoryboard *)mainStoryBoard {
+    return [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+}
+
+- (void)setupContentController:(NSViewController *)contentController {
+    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = contentController;
 }
 
 @end

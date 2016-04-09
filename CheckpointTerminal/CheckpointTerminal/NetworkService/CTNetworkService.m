@@ -9,8 +9,10 @@
 #import <AFNetworking/AFNetworking.h>
 
 #import "CTNetworkService.h"
+#import "CTSession.h"
 
-#define NullIfNil(obj) obj != nil ? obj : [NSNull null]
+#import "CTUser.h"
+#import "CTGame.h"
 
 static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
 
@@ -32,24 +34,49 @@ static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
                                  };
     [CTNetworkService POST:@"/users"
                 parameters:parameters
-                completion:completion];
+                completion:^(BOOL success, id data, NSError *error) {
+                    if (success && data) {
+                        [CTSession sharedSession].userId = [data objectForKey:@"uid"];
+                    }
+                    if (completion) {
+                        completion(success, nil, error);
+                    }
+                }];
 }
 
-- (void)startNewGameWithName:(NSString *)gameName
-                 creatorName:(NSString *)creatorName
-                        mode:(NSString *)mode
-                        code:(NSString *)code
-                  completion:(CTNetworkServiceCompletion)completion {
+- (void)createNewGameWithName:(NSString *)gameName
+                  creatorName:(NSString *)creatorName
+                         mode:(NSString *)mode
+                         code:(NSString *)code
+                   completion:(CTNetworkServiceCompletion)completion {
     NSDictionary *parameters = @{
                                  @"name" : NullIfNil(gameName),
                                  @"creatorName" : NullIfNil(creatorName),
                                  @"mode" : NullIfNil(mode),
-                                 @"code" : NullIfNil(code)
+                                 @"code" : NullIfNil(code),
+                                 @"respawnSeconds" : @(20)
                                  };
     [CTNetworkService POST:@"/games"
                 parameters:parameters
-                completion:completion];
+                completion:^(BOOL success, id data, NSError *error) {
+                    CTGame *game = nil;
+                    if (success && data) {
+                        game = [CTGame gameWithJSON:data];
+                    }
+                    if (completion) {
+                        completion(success, game, error);
+                    }
+                }];
 }
+
+- (void)gameWithName:(NSString *)gameName
+          completion:(CTNetworkServiceCompletion)completion {
+    [CTNetworkService GET:[NSString stringWithFormat:@"/games/%@", gameName]
+               parameters:nil
+               completion:completion];
+}
+
+#pragma mark - Private Methods
 
 + (NSURLSessionDataTask *)GET:(NSString *)path
                    parameters:(id)parameters
@@ -106,6 +133,10 @@ static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
     
     requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    if ([CTSession sharedSession].isLogged) {
+        [requestSerializer setValue:[CTSession sharedSession].userId forHTTPHeaderField:@"uid"];
+    }
     
     NSURL *requestUrl = [NSURL URLWithString:path
                                relativeToURL:[NSURL URLWithString:CTAPIBaseUrl]];

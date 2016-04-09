@@ -1,13 +1,13 @@
 //
-//  CTStartGameScreenController.h
+//  CTShot.m
 //  CheckpointTerminal
 //
 //  Created by Evgeny Kubrakov on 09/04/16.
 //  Copyright © 2016 Streetmage. All rights reserved.
 //
 
-#import "CTBaseController.h"
+#import "CTShot.h"
 
-@interface CTStartGameScreenController : CTBaseController
+@implementation CTShot
 
 @end
