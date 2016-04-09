@@ -128,6 +128,43 @@ Start Game</string>
             </objects>
             <point key="canvasLocation" x="151" y="897"/>
         </scene>
+        <!--Application-->
+        <scene sceneID="bdy-cb-BXj">
+            <objects>
+                <application id="nRg-kR-GIO" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="Y3L-NE-ZJm">
+                        <items>
+                            <menuItem title="CT" id="H4d-8F-MPV" userLabel="CT">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="CT" systemMenu="apple" id="yyL-6X-hOd">
+                                    <items>
+                                        <menuItem title="About Checkpoint Terminal" id="GmR-ZE-vsM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="HAj-cb-wMu"/>
+                                        <menuItem title="Quit" keyEquivalent="q" id="jWk-yn-Hyi"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Help" id="R3b-E4-8Up">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" systemMenu="help" id="7yh-rw-EiG">
+                                    <items>
+                                        <menuItem title="Help" keyEquivalent="?" id="7eu-Mm-CId"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="jUa-S8-5wy" id="XJI-sr-fhI"/>
+                    </connections>
+                </application>
+                <customObject id="H2r-cS-ojQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="jUa-S8-5wy" customClass="CTAppDelegate"/>
+            </objects>
+            <point key="canvasLocation" x="151" y="-154"/>
+        </scene>
     </scenes>
     <resources>
         <image name="PlayButtonBG" width="300" height="300"/>

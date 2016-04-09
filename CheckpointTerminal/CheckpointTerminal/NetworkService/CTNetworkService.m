@@ -105,6 +105,7 @@ static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
                           completion:(CTNetworkServiceCompletion)completion {
     
     requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSURL *requestUrl = [NSURL URLWithString:path
                                relativeToURL:[NSURL URLWithString:CTAPIBaseUrl]];
@@ -114,6 +115,7 @@ static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
                                          URLString:requestUrl.absoluteString
                                         parameters:parameters
                                              error:nil];
+    request.timeoutInterval = 20;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager setResponseSerializer:responseSerializer];

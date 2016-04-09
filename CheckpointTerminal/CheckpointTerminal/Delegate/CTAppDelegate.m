@@ -16,26 +16,14 @@
 
 @interface CTAppDelegate ()
 
-@property (nonatomic, strong) NSStoryboard *mainStoryboard;
-
 @end
 
 @implementation CTAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-    NSStoryboard *mainStoryboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    self.mainWindowController = [mainStoryboard instantiateControllerWithIdentifier:@"MainWindowController"];
-    [self.mainWindowController showWindow:self];
     if (![CTSession sharedSession].isLogged) {
-        [self openRegistrationScreen];
+        [[CTAppDelegate sharedInstance] openRegistrationScreen];
     }
-    else {
-        [self openStartGameScreen];
-    }
-}
-
-- (void)applicationWillTerminate:(NSNotification *)notification {
-    [[CTArduinoService sharedService] disconnect];
 }
 
 #pragma mark - Accessors
@@ -47,13 +35,13 @@
 #pragma mark - Public Methods
 
 - (void)openRegistrationScreen {
-    CTConnectionScreenController *connectionScreenController = [self.mainStoryboard instantiateControllerWithIdentifier:@"CTConnectionScreenController"];
-    self.mainWindowController.contentViewController = connectionScreenController;
+    CTConnectionScreenController *connectionScreenController = [[NSStoryboard storyboardWithName:@"Main" bundle:nil]instantiateControllerWithIdentifier:@"CTConnectionScreenController"];
+    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = connectionScreenController;
 }
 
 - (void)openStartGameScreen {
-    CTStartGameScreenController *startGameScreenController = [self.mainStoryboard instantiateControllerWithIdentifier:@"CTStartGameScreenController"];
-    self.mainWindowController.contentViewController = startGameScreenController;
+    CTStartGameScreenController *startGameScreenController = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"CTStartGameScreenController"];
+    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = startGameScreenController;
 }
 
 @end

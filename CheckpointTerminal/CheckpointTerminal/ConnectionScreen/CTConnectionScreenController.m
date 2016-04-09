@@ -12,6 +12,8 @@
 #import "CTConnectionScreenController.h"
 #import "CTNetworkService.h"
 
+#import "CTAppDelegate.h"
+
 @interface CTConnectionScreenController () <NSTextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet NSTextField *phoneNumberTextField;
@@ -37,8 +39,16 @@
             NSString *phonenNumberInE164Format = [phoneNumberUtil  format:parsedPhoneNumber
                                                              numberFormat:NBEPhoneNumberFormatE164
                                                                     error:&error];
-            NSLog(@"TODO: send phone number for registration %@", phonenNumberInE164Format);
-            [self performSegueWithIdentifier:@"ToStartGameScreen" sender:self];
+            [[CTNetworkService sharedService] registerWithPhoneNumber:phonenNumberInE164Format
+                                                           completion:^(BOOL success, id data, NSError *error) {
+                                                               if (success) {
+                                                                    [[CTAppDelegate sharedInstance] openStartGameScreen];
+                                                               }
+                                                               else {
+                                                                   NSAlert *alert = [NSAlert alertWithError:error];
+                                                                   [alert runModal];
+                                                               }
+                                                           }];
         }
     }
     
