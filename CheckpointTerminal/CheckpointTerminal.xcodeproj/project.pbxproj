@@ -13,6 +13,10 @@
 		5C10A4541CB80E7D003FE682 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C10A4531CB80E7D003FE682 /* Main.storyboard */; };
 		5C10A4571CB812D9003FE682 /* CTConnectionScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C10A4561CB812D9003FE682 /* CTConnectionScreenController.m */; };
 		5C10A45B1CB819F6003FE682 /* CTArduinoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C10A45A1CB819F6003FE682 /* CTArduinoService.m */; };
+		5CFE376A1CB8D91C00479F69 /* CTRepeatTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37691CB8D91C00479F69 /* CTRepeatTimer.m */; };
+		5CFE376D1CB8DDA300479F69 /* CTStartGameScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE376C1CB8DDA300479F69 /* CTStartGameScreenController.m */; };
+		5CFE37711CB8DDE500479F69 /* CTNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37701CB8DDE500479F69 /* CTNetworkService.m */; };
+		5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37751CB8F2F200479F69 /* CTSession.m */; };
 		69E2A8A3A15A68471210CA02 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A6EFF586C42B1303B3467 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,15 @@
 		5C10A4561CB812D9003FE682 /* CTConnectionScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTConnectionScreenController.m; sourceTree = "<group>"; };
 		5C10A4591CB819F6003FE682 /* CTArduinoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTArduinoService.h; sourceTree = "<group>"; };
 		5C10A45A1CB819F6003FE682 /* CTArduinoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTArduinoService.m; sourceTree = "<group>"; };
+		5CFE37681CB8D91C00479F69 /* CTRepeatTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTRepeatTimer.h; sourceTree = "<group>"; };
+		5CFE37691CB8D91C00479F69 /* CTRepeatTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTRepeatTimer.m; sourceTree = "<group>"; };
+		5CFE376B1CB8DDA300479F69 /* CTStartGameScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTStartGameScreenController.h; sourceTree = "<group>"; };
+		5CFE376C1CB8DDA300479F69 /* CTStartGameScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTStartGameScreenController.m; sourceTree = "<group>"; };
+		5CFE376F1CB8DDE500479F69 /* CTNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTNetworkService.h; sourceTree = "<group>"; };
+		5CFE37701CB8DDE500479F69 /* CTNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTNetworkService.m; sourceTree = "<group>"; };
+		5CFE37721CB8F13800479F69 /* CTPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTPrefix.pch; sourceTree = "<group>"; };
+		5CFE37741CB8F2F200479F69 /* CTSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTSession.h; sourceTree = "<group>"; };
+		5CFE37751CB8F2F200479F69 /* CTSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTSession.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				5C10A4481CB80D0C003FE682 /* Delegate */,
+				5CFE376E1CB8DDD200479F69 /* NetworkService */,
+				5CFE37731CB8F2D800479F69 /* Session */,
 				5C10A4581CB817D2003FE682 /* ArduinoService */,
-				5C10A44F1CB80E0C003FE682 /* ConnectionScreen */,
+				5C10A44F1CB80E0C003FE682 /* Screens */,
+				5CFE37671CB8D91C00479F69 /* Timer */,
 				5C10A4491CB80D8B003FE682 /* Resources */,
 				5C10A4371CB7F21F003FE682 /* Supporting Files */,
 			);
@@ -88,6 +104,7 @@
 			children = (
 				5C10A4421CB7F21F003FE682 /* Info.plist */,
 				5C10A4381CB7F21F003FE682 /* main.m */,
+				5CFE37721CB8F13800479F69 /* CTPrefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -110,12 +127,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		5C10A44F1CB80E0C003FE682 /* ConnectionScreen */ = {
+		5C10A44F1CB80E0C003FE682 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				5C10A4551CB812D9003FE682 /* CTConnectionScreenController.h */,
 				5C10A4561CB812D9003FE682 /* CTConnectionScreenController.m */,
+				5CFE376B1CB8DDA300479F69 /* CTStartGameScreenController.h */,
+				5CFE376C1CB8DDA300479F69 /* CTStartGameScreenController.m */,
 			);
+			name = Screens;
 			path = ConnectionScreen;
 			sourceTree = "<group>";
 		};
@@ -126,6 +146,33 @@
 				5C10A45A1CB819F6003FE682 /* CTArduinoService.m */,
 			);
 			path = ArduinoService;
+			sourceTree = "<group>";
+		};
+		5CFE37671CB8D91C00479F69 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				5CFE37681CB8D91C00479F69 /* CTRepeatTimer.h */,
+				5CFE37691CB8D91C00479F69 /* CTRepeatTimer.m */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		5CFE376E1CB8DDD200479F69 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				5CFE376F1CB8DDE500479F69 /* CTNetworkService.h */,
+				5CFE37701CB8DDE500479F69 /* CTNetworkService.m */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		5CFE37731CB8F2D800479F69 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				5CFE37741CB8F2F200479F69 /* CTSession.h */,
+				5CFE37751CB8F2F200479F69 /* CTSession.m */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 		C1ABB10FFB934CCE07F20EAF /* Pods */ = {
@@ -258,9 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C10A4571CB812D9003FE682 /* CTConnectionScreenController.m in Sources */,
+				5CFE376D1CB8DDA300479F69 /* CTStartGameScreenController.m in Sources */,
+				5CFE376A1CB8D91C00479F69 /* CTRepeatTimer.m in Sources */,
 				5C10A4391CB7F21F003FE682 /* main.m in Sources */,
+				5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */,
 				5C10A44E1CB80DC1003FE682 /* CTAppDelegate.m in Sources */,
 				5C10A45B1CB819F6003FE682 /* CTArduinoService.m in Sources */,
+				5CFE37711CB8DDE500479F69 /* CTNetworkService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +405,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CheckpointTerminal/CTPrefix.pch;
 				INFOPLIST_FILE = CheckpointTerminal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.streetmage.CheckpointTerminal;
@@ -367,6 +420,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CheckpointTerminal/CTPrefix.pch;
 				INFOPLIST_FILE = CheckpointTerminal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.streetmage.CheckpointTerminal;

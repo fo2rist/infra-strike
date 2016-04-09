@@ -11,12 +11,11 @@
                 <windowController id="I8N-5y-7oZ" sceneMemberID="viewController">
                     <window key="window" title="Checkpoint Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="s7c-jA-oeu">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="163" y="199" width="480" height="270"/>
+                        <rect key="contentRect" x="163" y="199" width="640" height="480"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
                     </window>
                     <connections>
-                        <segue destination="XSM-sY-RtP" kind="relationship" relationship="window.shadowedContentViewController" id="ymR-hj-Bbl"/>
+                        <segue destination="XZr-Te-ocv" kind="relationship" relationship="window.shadowedContentViewController" id="BII-yE-TL9"/>
                     </connections>
                 </windowController>
                 <customObject id="WFG-28-iy4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -26,56 +25,111 @@
         <!--Connection Screen Controller-->
         <scene sceneID="5Rd-hV-zky">
             <objects>
-                <viewController id="XSM-sY-RtP" customClass="CTConnectionScreenController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CTConnectionScreenController" id="XSM-sY-RtP" customClass="CTConnectionScreenController" sceneMemberID="viewController">
                     <view key="view" id="Zcb-30-pmf">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyT-st-nOm">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
-                                <clipView key="contentView" id="avv-49-qCH">
-                                    <rect key="frame" x="1" y="1" width="438" height="228"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="mjI-8m-t7l">
-                                            <rect key="frame" x="0.0" y="0.0" width="438" height="228"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="438" height="228"/>
-                                            <size key="maxSize" width="463" height="10000000"/>
-                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="438" height="228"/>
-                                            <size key="maxSize" width="463" height="10000000"/>
-                                        </textView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="4GO-l2-ZrL">
-                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="JkZ-wz-dS5">
-                                    <rect key="frame" x="423" y="1" width="16" height="228"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z9J-We-Be1">
+                                <rect key="frame" x="120" y="220" width="400" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="9sV-y1-8ux"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Enter Phone Number" drawsBackground="YES" id="sqh-FV-Cx2">
+                                    <font key="font" size="30" name="HelveticaNeue"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="neX-sx-T1o">
+                                <rect key="frame" x="245" y="113" width="150" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="G8w-bg-heE"/>
+                                    <constraint firstAttribute="width" constant="150" id="dRz-IV-sfY"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" title="Register" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="JC3-kl-ESs">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="40" name="HelveticaNeue-CondensedBlack"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onRegisterButtonClick:" target="XSM-sY-RtP" id="Ogw-U8-uYv"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5XF-0i-HbW">
+                                <rect key="frame" x="135" y="346" width="371" height="74"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="fPK-BN-oCS">
+                                    <font key="font" size="30" name="HelveticaNeue-CondensedBlack"/>
+                                    <string key="title">Register Checkpoint Terminal
+with Your Phone Number</string>
+                                    <color key="textColor" red="0.70196078431372544" green="0.16862745098039217" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="QyT-st-nOm" firstAttribute="centerX" secondItem="Zcb-30-pmf" secondAttribute="centerX" id="1Z7-Ci-eXT"/>
-                            <constraint firstAttribute="trailing" secondItem="QyT-st-nOm" secondAttribute="trailing" constant="20" id="5ie-2t-uH4"/>
-                            <constraint firstAttribute="bottom" secondItem="QyT-st-nOm" secondAttribute="bottom" constant="20" id="7jf-30-WnS"/>
-                            <constraint firstItem="QyT-st-nOm" firstAttribute="top" secondItem="Zcb-30-pmf" secondAttribute="top" constant="20" id="Zvl-B7-Qeo"/>
-                            <constraint firstItem="QyT-st-nOm" firstAttribute="centerY" secondItem="Zcb-30-pmf" secondAttribute="centerY" id="cxB-Bq-0aG"/>
-                            <constraint firstItem="QyT-st-nOm" firstAttribute="leading" secondItem="Zcb-30-pmf" secondAttribute="leading" constant="20" id="pvX-lD-7a8"/>
+                            <constraint firstItem="5XF-0i-HbW" firstAttribute="top" secondItem="Zcb-30-pmf" secondAttribute="top" constant="60" id="0sH-2R-c0K"/>
+                            <constraint firstItem="neX-sx-T1o" firstAttribute="centerX" secondItem="Z9J-We-Be1" secondAttribute="centerX" id="b39-oG-PKb"/>
+                            <constraint firstItem="Z9J-We-Be1" firstAttribute="centerY" secondItem="Zcb-30-pmf" secondAttribute="centerY" id="dct-75-DSr"/>
+                            <constraint firstItem="Z9J-We-Be1" firstAttribute="centerX" secondItem="Zcb-30-pmf" secondAttribute="centerX" id="mWa-Hd-hF6"/>
+                            <constraint firstItem="neX-sx-T1o" firstAttribute="top" secondItem="Z9J-We-Be1" secondAttribute="bottom" constant="57" id="rYZ-kQ-e11"/>
+                            <constraint firstItem="5XF-0i-HbW" firstAttribute="centerX" secondItem="Zcb-30-pmf" secondAttribute="centerX" id="tOF-eC-9tX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="mjI-8m-t7l" id="Qhk-ey-Tau"/>
+                        <outlet property="phoneNumberTextField" destination="Z9J-We-Be1" id="PRl-8O-YNR"/>
                     </connections>
                 </viewController>
                 <customObject id="hZn-rr-xHj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="151" y="727"/>
+            <point key="canvasLocation" x="151" y="1497"/>
+        </scene>
+        <!--Start Game Screen Controller-->
+        <scene sceneID="6J9-5Z-M4y">
+            <objects>
+                <viewController storyboardIdentifier="CTStartGameScreenController" id="XZr-Te-ocv" customClass="CTStartGameScreenController" sceneMemberID="viewController">
+                    <view key="view" id="xsC-IO-8vF">
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="ban-pU-KEW">
+                                <rect key="frame" x="270" y="170" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="mYi-xT-cdM"/>
+                                    <constraint firstAttribute="height" constant="100" id="n8s-PT-gSc"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="PlayButtonBG" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="gRV-hG-II0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onPlayButtonClick:" target="XZr-Te-ocv" id="gwn-HY-JAS"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cpp-ha-CdJ">
+                                <rect key="frame" x="130" y="310" width="381" height="98"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="KC6-OI-rtf">
+                                    <font key="font" size="40" name="HelveticaNeue-CondensedBlack"/>
+                                    <string key="title">Press Create Button to
+Start Game</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Cpp-ha-CdJ" firstAttribute="centerX" secondItem="ban-pU-KEW" secondAttribute="centerX" id="Mu9-he-hu8"/>
+                            <constraint firstItem="ban-pU-KEW" firstAttribute="centerX" secondItem="xsC-IO-8vF" secondAttribute="centerX" id="TbQ-Hl-keq"/>
+                            <constraint firstItem="ban-pU-KEW" firstAttribute="centerY" secondItem="xsC-IO-8vF" secondAttribute="centerY" constant="20" id="d9b-go-ceF"/>
+                            <constraint firstItem="ban-pU-KEW" firstAttribute="top" secondItem="Cpp-ha-CdJ" secondAttribute="bottom" constant="40" id="nX7-c7-wya"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="Uxa-VR-JX3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="151" y="897"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="PlayButtonBG" width="300" height="300"/>
+    </resources>
 </document>

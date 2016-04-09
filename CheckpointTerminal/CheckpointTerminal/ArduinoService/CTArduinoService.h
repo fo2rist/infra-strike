@@ -8,23 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, CTArduinoServiceEvent) {
-    CTArduinoServiceIRCodeReceivedEvent,
-    CTArduinoServicePortOpened,
-    CTArduinoServicePortClosed
-};
-
-@class CTArduinoService;
-
-@protocol CTArduinoServiceObserver <NSObject>
-
-@required
-
-- (void)arduinoService:(CTArduinoService *)arduinoService
-          didSentEvent:(CTArduinoServiceEvent)event
-                  data:(id)data;
-
-@end
+extern NSString *const CTArduinoServiceIRCodeReceivedEvent;
+extern NSString *const CTArduinoServicePortOpened;
+extern NSString *const CTArduinoServicePortClosed;
 
 @interface CTArduinoService : NSObject
 
@@ -32,9 +18,5 @@ typedef NS_ENUM(NSUInteger, CTArduinoServiceEvent) {
 
 - (void)connect;
 - (void)disconnect;
-
-- (void)subscribeForEvent:(CTArduinoServiceEvent)event observer:(id <CTArduinoServiceObserver>)observer;
-- (void)unsubscribeObserver:(id <CTArduinoServiceObserver>)observer forEvent:(CTArduinoServiceEvent)event;
-- (void)unsubscribeObserversForEvent:(CTArduinoServiceEvent)event;
 
 @end

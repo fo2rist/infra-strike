@@ -12,4 +12,9 @@
 
 @property NSWindowController *mainWindowController;
 
++ (CTAppDelegate *)sharedInstance;
+
+- (void)openRegistrationScreen;
+- (void)openStartGameScreen;
+
 @end

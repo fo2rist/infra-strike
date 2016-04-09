@@ -10,10 +10,13 @@
 
 #import "CTArduinoService.h"
 
+NSString *const CTArduinoServiceIRCodeReceivedEvent = @"ArduinoServiceIRCodeReceivedEvent";
+NSString *const CTArduinoServicePortOpened = @"ArduinoServicePortOpened";
+NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
+
 @interface CTArduinoService () <ORSSerialPortDelegate>
 
 @property (nonatomic, strong) ORSSerialPort *serialPort;
-@property (nonatomic, strong) NSMutableDictionary <NSNumber *, NSMutableArray *> *observersForEvents;
 
 @end
 
@@ -39,13 +42,6 @@
     return _serialPort;
 }
 
-- (NSMutableDictionary *)observersForEvents {
-    if (!_observersForEvents) {
-        _observersForEvents = [NSMutableDictionary dictionary];
-    }
-    return _observersForEvents;
-}
-
 #pragma mark - Public Methods
 
 - (void)connect {
@@ -54,35 +50,6 @@
 
 - (void)disconnect {
     [self.serialPort close];
-}
-
-- (void)subscribeForEvent:(CTArduinoServiceEvent)event observer:(id)observer {
-    NSMutableArray *observers = [self.observersForEvents objectForKey:@(event)];
-    if (!observers) {
-        observers = [NSMutableArray array];
-    }
-    [observers addObject:observer];
-    [self.observersForEvents setObject:observers forKey:@(event)];
-}
-
-- (void)unsubscribeObserver:(id)observer forEvent:(CTArduinoServiceEvent)event {
-    NSMutableArray *observers = [self.observersForEvents objectForKey:@(event)];
-    if (!observers) {
-        [observers removeObject:observer];
-    }
-}
-
-- (void)unsubscribeObserversForEvent:(CTArduinoServiceEvent)event {
-    [self.observersForEvents removeObjectForKey:@(event)];
-}
-
-#pragma mark - Private Methods
-
-- (void)sentEvent:(CTArduinoServiceEvent)event data:(id)data {
-    NSMutableArray *observers = [self.observersForEvents objectForKey:@(event)];
-    for (id <CTArduinoServiceObserver> observer in observers) {
-        [observer arduinoService:self didSentEvent:event data:data];
-    }
 }
 
 #pragma mark - ORSSerialPortDelegate Methods
@@ -94,18 +61,15 @@
 - (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data {
     NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
     NSLog(@"%@", decodedString);
-//    NSLog(@"%@", data);
-    [self sentEvent:CTArduinoServiceIRCodeReceivedEvent data:decodedString];
+    
 }
 
 - (void)serialPortWasOpened:(ORSSerialPort *)serialPort {
     NSLog(@"Port opened");
-    [self sentEvent:CTArduinoServicePortOpened data:nil];
 }
 
 - (void)serialPortWasClosed:(ORSSerialPort *)serialPort {
     NSLog(@"Port closed");
-    [self sentEvent:CTArduinoServicePortClosed data:nil];
 }
 
 @end

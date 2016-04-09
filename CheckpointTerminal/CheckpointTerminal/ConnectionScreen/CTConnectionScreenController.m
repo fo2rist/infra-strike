@@ -6,40 +6,53 @@
 //  Copyright © 2016 Streetmage. All rights reserved.
 //
 
+#import <libPhoneNumber-iOS/NBPhoneNumber.h>
+#import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
+
 #import "CTConnectionScreenController.h"
 
-#import "CTArduinoService.h"
+@interface CTConnectionScreenController () <NSTextFieldDelegate>
 
-@interface CTConnectionScreenController () <CTArduinoServiceObserver>
-
-@property (nonatomic) IBOutlet NSTextView *textView;
+@property (nonatomic, weak) IBOutlet NSTextField *phoneNumberTextField;
 
 @end
 
 @implementation CTConnectionScreenController
 
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    [[CTArduinoService sharedService] connect];
-    [[CTArduinoService sharedService] subscribeForEvent:CTArduinoServiceIRCodeReceivedEvent
-                                               observer:self];
-}
+#pragma mark - Private Methods
 
-- (void)viewWillDisappear {
-    [super viewWillDisappear];
-    [[CTArduinoService sharedService] disconnect];
-    [[CTArduinoService sharedService] unsubscribeObserver:self
-                                                 forEvent:CTArduinoServiceIRCodeReceivedEvent];
-}
-
-#pragma mark - CTArduinoServiceObserver Methods
-
-- (void)arduinoService:(CTArduinoService *)arduinoService
-          didSentEvent:(CTArduinoServiceEvent)event
-                  data:(id)data {
-    if ([data isKindOfClass:[NSString class]]) {
-        self.textView.string = data;
+- (void)registerWithPhoneNumber:(NSString *)phoneNumber {
+    
+    NBPhoneNumberUtil *phoneNumberUtil = [[NBPhoneNumberUtil alloc] init];
+    NSError *error = nil;
+    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    NBPhoneNumber *parsedPhoneNumber = [phoneNumberUtil parse:phoneNumber
+                                                defaultRegion:countryCode
+                                                        error:&error];
+    
+    if (!error) {
+        BOOL phoneNumberIsValid =  [phoneNumberUtil isValidNumber:parsedPhoneNumber];
+        if (phoneNumberIsValid) {
+            NSString *phonenNumberInE164Format = [phoneNumberUtil  format:parsedPhoneNumber
+                                                             numberFormat:NBEPhoneNumberFormatE164
+                                                                    error:&error];
+            NSLog(@"TODO: send phone number for registration %@", phonenNumberInE164Format);
+            [self performSegueWithIdentifier:@"ToStartGameScreen" sender:self];
+        }
     }
+    
+    if (error) {
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert runModal];
+    }
+    
+}
+
+
+#pragma mark - Actions
+
+- (IBAction)onRegisterButtonClick:(NSButton *)sender {
+    [self registerWithPhoneNumber:self.phoneNumberTextField.stringValue];
 }
 
 @end

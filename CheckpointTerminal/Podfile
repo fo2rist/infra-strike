@@ -1,4 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :osx, '10.7'
+platform :osx, '10.9'
 
 pod 'ORSSerialPort', '~> 2.0.2'
+pod 'libPhoneNumber-iOS', '~> 0.8.11'
