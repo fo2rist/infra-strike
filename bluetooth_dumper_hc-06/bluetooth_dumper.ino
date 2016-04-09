@@ -21,7 +21,8 @@ void setup()
 {
   //Serial.begin(9600);
   mySerial.begin(9600);
-  delay(500);
+  delay(100);
+  //TODO: find out why it doesn't work
   mySerial.println("AT+NAME=infra-strike");
   delay(100);
   mySerial.println("AT+PSWD=1234567890");
