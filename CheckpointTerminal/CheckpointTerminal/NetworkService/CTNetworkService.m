@@ -73,7 +73,59 @@ static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
           completion:(CTNetworkServiceCompletion)completion {
     [CTNetworkService GET:[NSString stringWithFormat:@"/games/%@", gameName]
                parameters:nil
-               completion:completion];
+               completion:^(BOOL success, id data, NSError *error) {
+                   CTGame *game = nil;
+                   if (success && data) {
+                       game = [CTGame gameWithJSON:data];
+                   }
+                   if (completion) {
+                       completion(success, game, error);
+                   }
+               }];
+}
+
+- (void)shootWithGameName:(NSString *)gameName
+                     code:(NSString *)code
+               completion:(CTNetworkServiceCompletion)completion {
+    NSDictionary *parameters = @{
+                                 @"code" : NullIfNil(code)
+                                 };
+    [CTNetworkService POST:[NSString stringWithFormat:@"games/%@/shots", gameName]
+                parameters:parameters
+                completion:completion];
+}
+
+- (void)startGameWithName:(NSString *)gameName
+               completion:(CTNetworkServiceCompletion)completion {
+    NSDictionary *parameters = @{
+                                 @"state" : CTStateInProgress
+                                 };
+    [CTNetworkService PUT:[NSString stringWithFormat:@"/games/%@", gameName]
+               parameters:parameters
+               completion:^(BOOL success, id data, NSError *error) {
+                   CTGame *game = nil;
+                   if (success && data) {
+                       game = [CTGame gameWithJSON:data];
+                   }
+                   if (completion) {
+                       completion(success, game, error);
+                   }
+               }];
+}
+
+- (void)stopGameWithName:(NSString *)gameName
+              completion:(CTNetworkServiceCompletion)completion {
+    [CTNetworkService DELETE:[NSString stringWithFormat:@"/games/%@", gameName]
+                  parameters:nil
+                  completion:^(BOOL success, id data, NSError *error) {
+                      CTGame *game = nil;
+                      if (success && data) {
+                          game = [CTGame gameWithJSON:data];
+                      }
+                      if (completion) {
+                          completion(success, game, error);
+                      }
+                  }];
 }
 
 #pragma mark - Private Methods

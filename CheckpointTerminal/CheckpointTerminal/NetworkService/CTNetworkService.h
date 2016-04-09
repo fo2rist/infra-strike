@@ -18,13 +18,23 @@ typedef void(^CTNetworkServiceCompletion)(BOOL success, id data, NSError *error)
                      completion:(CTNetworkServiceCompletion)completion;
 
 - (void)createNewGameWithName:(NSString *)gameName
-                 creatorName:(NSString *)creatorName
-                        mode:(NSString *)mode
-                        code:(NSString *)code
-                  completion:(CTNetworkServiceCompletion)completion;
+                  creatorName:(NSString *)creatorName
+                         mode:(NSString *)mode
+                         code:(NSString *)code
+                   completion:(CTNetworkServiceCompletion)completion;
 
 - (void)gameWithName:(NSString *)gameName
           completion:(CTNetworkServiceCompletion)completion;
+
+- (void)shootWithGameName:(NSString *)gameName
+                     code:(NSString *)code
+               completion:(CTNetworkServiceCompletion)completion;
+
+- (void)startGameWithName:(NSString *)gameName
+               completion:(CTNetworkServiceCompletion)completion;
+
+- (void)stopGameWithName:(NSString *)gameName
+              completion:(CTNetworkServiceCompletion)completion;
 
 @end
 

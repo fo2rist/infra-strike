@@ -11,9 +11,18 @@
 @implementation CTUser
 
 + (CTUser *)userWithJSON:(NSDictionary *)json {
+    
+    if (!json) {
+        return nil;
+    }
+    
     CTUser *user = [[CTUser alloc] init];
-    user.phoneNumber = [json objectForKey:@"phone"];
+    user.name = [json objectForKey:@"name"];
+    user.code = [json objectForKey:@"code"];
+    user.phone = [json objectForKey:@"phone"];
+    
     return user;
+    
 }
 
 @end

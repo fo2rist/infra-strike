@@ -10,7 +10,9 @@
 
 @interface CTUser : NSObject
 
-@property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *phone;
 
 + (CTUser *)userWithJSON:(NSDictionary *)json;
 

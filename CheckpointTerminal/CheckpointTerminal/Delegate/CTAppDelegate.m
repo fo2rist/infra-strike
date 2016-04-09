@@ -24,10 +24,10 @@
 @implementation CTAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
+    [CTSession sharedSession].userId = nil;
     if (![CTSession sharedSession].isLogged) {
         [[CTAppDelegate sharedInstance] openRegistrationScreen];
     }
-    [CTSession sharedSession].userId = nil;
 }
 
 #pragma mark - Accessors
