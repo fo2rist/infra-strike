@@ -3,3 +3,4 @@ platform :osx, '10.9'
 
 pod 'ORSSerialPort', '~> 2.0.2'
 pod 'libPhoneNumber-iOS', '~> 0.8.11'
+pod 'AFNetworking', '~> 3.1.0'

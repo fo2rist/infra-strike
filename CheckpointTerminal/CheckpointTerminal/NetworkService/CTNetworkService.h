@@ -14,7 +14,14 @@ typedef void(^CTNetworkServiceCompletion)(BOOL success, id data, NSError *error)
 
 + (instancetype)sharedService;
 
-- (void)registerWithPhoneNumber:(NSString *)phoneNumber completion:(CTNetworkServiceCompletion)completion;
-- (void)startNewGameWithUserId:(NSString *)userId completion:(CTNetworkServiceCompletion)completion;
+- (void)registerWithPhoneNumber:(NSString *)phoneNumber
+                     completion:(CTNetworkServiceCompletion)completion;
+
+- (void)startNewGameWithName:(NSString *)gameName
+                 creatorName:(NSString *)creatorName
+                        mode:(NSString *)mode
+                        code:(NSString *)code
+                  completion:(CTNetworkServiceCompletion)completion;
 
 @end
+

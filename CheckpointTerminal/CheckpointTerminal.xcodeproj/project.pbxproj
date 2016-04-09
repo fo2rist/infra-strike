@@ -17,6 +17,8 @@
 		5CFE376D1CB8DDA300479F69 /* CTStartGameScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE376C1CB8DDA300479F69 /* CTStartGameScreenController.m */; };
 		5CFE37711CB8DDE500479F69 /* CTNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37701CB8DDE500479F69 /* CTNetworkService.m */; };
 		5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37751CB8F2F200479F69 /* CTSession.m */; };
+		5CFE377A1CB9001A00479F69 /* CTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE37791CB9001A00479F69 /* CTUser.m */; };
+		5CFE377D1CB9002400479F69 /* CTGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE377C1CB9002400479F69 /* CTGame.m */; };
 		69E2A8A3A15A68471210CA02 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A6EFF586C42B1303B3467 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,10 @@
 		5CFE37721CB8F13800479F69 /* CTPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTPrefix.pch; sourceTree = "<group>"; };
 		5CFE37741CB8F2F200479F69 /* CTSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTSession.h; sourceTree = "<group>"; };
 		5CFE37751CB8F2F200479F69 /* CTSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTSession.m; sourceTree = "<group>"; };
+		5CFE37781CB9001A00479F69 /* CTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUser.h; sourceTree = "<group>"; };
+		5CFE37791CB9001A00479F69 /* CTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTUser.m; sourceTree = "<group>"; };
+		5CFE377B1CB9002400479F69 /* CTGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGame.h; sourceTree = "<group>"; };
+		5CFE377C1CB9002400479F69 /* CTGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGame.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				5C10A4481CB80D0C003FE682 /* Delegate */,
+				5CFE37771CB9001000479F69 /* Entities */,
 				5CFE376E1CB8DDD200479F69 /* NetworkService */,
 				5CFE37731CB8F2D800479F69 /* Session */,
 				5C10A4581CB817D2003FE682 /* ArduinoService */,
@@ -173,6 +180,17 @@
 				5CFE37751CB8F2F200479F69 /* CTSession.m */,
 			);
 			path = Session;
+			sourceTree = "<group>";
+		};
+		5CFE37771CB9001000479F69 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5CFE37781CB9001A00479F69 /* CTUser.h */,
+				5CFE37791CB9001A00479F69 /* CTUser.m */,
+				5CFE377C1CB9002400479F69 /* CTGame.m */,
+				5CFE377B1CB9002400479F69 /* CTGame.h */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		C1ABB10FFB934CCE07F20EAF /* Pods */ = {
@@ -311,6 +329,8 @@
 				5CFE37761CB8F2F200479F69 /* CTSession.m in Sources */,
 				5C10A44E1CB80DC1003FE682 /* CTAppDelegate.m in Sources */,
 				5C10A45B1CB819F6003FE682 /* CTArduinoService.m in Sources */,
+				5CFE377A1CB9001A00479F69 /* CTUser.m in Sources */,
+				5CFE377D1CB9002400479F69 /* CTGame.m in Sources */,
 				5CFE37711CB8DDE500479F69 /* CTNetworkService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

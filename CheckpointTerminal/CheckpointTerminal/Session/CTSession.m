@@ -32,4 +32,8 @@ static NSString *const CTUserIdStorageKey = @"UserIdStorageKey";
     return [[NSUserDefaults standardUserDefaults] objectForKey:CTUserIdStorageKey];
 }
 
+- (BOOL)isLogged {
+    return self.userId != nil;
+}
+
 @end

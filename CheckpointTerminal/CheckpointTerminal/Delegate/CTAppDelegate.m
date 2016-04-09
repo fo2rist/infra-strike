@@ -25,8 +25,13 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     NSStoryboard *mainStoryboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     self.mainWindowController = [mainStoryboard instantiateControllerWithIdentifier:@"MainWindowController"];
-    if ([CTSession sharedSession])
     [self.mainWindowController showWindow:self];
+    if (![CTSession sharedSession].isLogged) {
+        [self openRegistrationScreen];
+    }
+    else {
+        [self openStartGameScreen];
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
