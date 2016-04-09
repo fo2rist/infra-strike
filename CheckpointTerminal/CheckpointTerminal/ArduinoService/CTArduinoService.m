@@ -35,7 +35,7 @@ NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
 
 - (ORSSerialPort *)serialPort {
     if (!_serialPort) {
-        _serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.usbserial-A603RPPP"];
+        _serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.HC-06-DevB"];
         _serialPort.baudRate = @(9600);
         _serialPort.delegate = self;
     }
@@ -45,11 +45,15 @@ NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
 #pragma mark - Public Methods
 
 - (void)connect {
-    [self.serialPort open];
+    if (!self.serialPort.isOpen) {
+        [self.serialPort open];
+    }
 }
 
 - (void)disconnect {
-    [self.serialPort close];
+    if (self.serialPort.isOpen) {
+        [self.serialPort close];
+    }
 }
 
 #pragma mark - ORSSerialPortDelegate Methods

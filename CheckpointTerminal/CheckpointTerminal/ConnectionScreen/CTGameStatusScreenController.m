@@ -41,7 +41,7 @@
     if (!_repeatTimer) {
         
         CTNetworkServiceCompletion completion = ^(BOOL success, CTGame *game, NSError *error) {
-            if (success) {
+            if (success && game) {
                 self.game = game;
             }
             else if (error) {
@@ -75,7 +75,7 @@
 
 - (void)setGame:(CTGame *)game {
     _game = game;
-    [self reloadData];
+    [self updateViews];
     if ([game.state isEqualToString:CTStatePending]) {
         self.gameStateChangeButton.image = [NSImage imageNamed:@"PlayButtonBG"];
     }
@@ -89,7 +89,7 @@
 
 #pragma mark - Private
 
-- (void)reloadData {
+- (void)updateViews {
     
 }
 
@@ -108,7 +108,7 @@
     if ([state isEqualToString:CTStatePending]) {
         [[CTNetworkService sharedService] startGameWithName:self.game.gameName
                                                  completion:^(BOOL success, CTGame *game, NSError *error) {
-                                                     if (success) {
+                                                     if (success && game) {
                                                          self.game = game;
                                                      }
                                                      else if (error) {
@@ -120,7 +120,7 @@
     else if ([state isEqualToString:CTStateInProgress]) {
         [[CTNetworkService sharedService] stopGameWithName:self.game.gameName
                                                 completion:^(BOOL success, CTGame *game, NSError *error) {
-                                                    if (success) {
+                                                    if (success && game) {
                                                         self.game = game;
                                                         [self stopPolling];
                                                     }

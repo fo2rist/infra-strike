@@ -30,6 +30,18 @@
     }
 }
 
+- (void)applicationWillBecomeActive:(NSNotification *)notification {
+    [[CTArduinoService sharedService] connect];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    [[CTArduinoService sharedService] disconnect];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    [[CTArduinoService sharedService] disconnect];
+}
+
 #pragma mark - Accessors
 
 + (CTAppDelegate *)sharedInstance {
