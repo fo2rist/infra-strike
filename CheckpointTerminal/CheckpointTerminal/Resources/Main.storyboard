@@ -15,7 +15,7 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
                     </window>
                     <connections>
-                        <segue destination="XZr-Te-ocv" kind="relationship" relationship="window.shadowedContentViewController" id="BII-yE-TL9"/>
+                        <segue destination="XSM-sY-RtP" kind="relationship" relationship="window.shadowedContentViewController" id="RUg-Ic-NmI"/>
                     </connections>
                 </windowController>
                 <customObject id="WFG-28-iy4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -111,16 +111,99 @@ Your Phone Number</string>
                                     <constraint firstAttribute="height" constant="100" id="Obf-eB-bW7"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="PlayButtonBG" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="yz3-xM-8Xl">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onChangeGameStateButtonClick:" target="5W5-2r-7Di" id="fap-eT-B9A"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="orJ-w9-oIP">
+                                <rect key="frame" x="219" y="380" width="202" height="49"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Game Name" id="IV2-eN-TFY">
+                                    <font key="font" size="40" name="HelveticaNeue-CondensedBlack"/>
+                                    <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-LE-LAT">
+                                <rect key="frame" x="20" y="128" width="600" height="244"/>
+                                <clipView key="contentView" ambiguous="YES" id="fqF-HH-Nej">
+                                    <rect key="frame" x="1" y="23" width="598" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pQI-VH-S55" id="kUi-wq-lLf">
+                                            <rect key="frame" x="0.0" y="0.0" width="598" height="220"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn width="400" minWidth="40" maxWidth="1000" id="bjQ-NT-yqK">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Users">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" identifier="UserCell" title="Text Cell" id="dJ2-kg-hdr">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn width="95" minWidth="40" maxWidth="95" id="BSe-Pz-6PI">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Kills">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" identifier="KillCell" title="Text Cell" id="SYi-rG-1ZT">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn identifier="" width="64" minWidth="10" maxWidth="95" id="XM3-rJ-zx0">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Deaths">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="2ik-Mf-G36">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="5W5-2r-7Di" id="hT3-sh-XG9"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="akZ-vt-cUv">
+                                    <rect key="frame" x="1" y="227" width="598" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cdS-IM-ufn">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="pQI-VH-S55">
+                                    <rect key="frame" x="0.0" y="0.0" width="598" height="23"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="orJ-w9-oIP" firstAttribute="centerX" secondItem="uZP-HB-Dtb" secondAttribute="centerX" id="4FT-pw-TfU"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="height" secondItem="uZP-HB-Dtb" secondAttribute="height" id="Gjh-uA-wbc"/>
+                            <constraint firstItem="orJ-w9-oIP" firstAttribute="top" secondItem="uZP-HB-Dtb" secondAttribute="top" constant="51" id="QQn-ux-32m"/>
                             <constraint firstAttribute="bottom" secondItem="dLx-9K-jC3" secondAttribute="bottom" constant="20" id="VIQ-7m-dib"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="centerX" secondItem="uZP-HB-Dtb" secondAttribute="centerX" id="WFj-mV-tcU"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="centerY" secondItem="uZP-HB-Dtb" secondAttribute="centerY" id="bJp-gE-Yvi"/>
@@ -155,7 +238,7 @@ Your Phone Number</string>
                                     <constraint firstAttribute="height" constant="100" id="n8s-PT-gSc"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="PlayButtonBG" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="gRV-hG-II0">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>

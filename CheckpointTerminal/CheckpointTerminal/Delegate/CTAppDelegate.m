@@ -73,7 +73,8 @@
 }
 
 - (void)setupContentController:(NSViewController *)contentController {
-    [NSApplication sharedApplication].windows.firstObject.windowController.contentViewController = contentController;
+    NSWindow *window = [NSApplication sharedApplication].windows.firstObject;
+    window.windowController.contentViewController = contentController;
 }
 
 @end

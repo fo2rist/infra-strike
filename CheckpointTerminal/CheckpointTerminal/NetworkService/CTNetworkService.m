@@ -14,7 +14,7 @@
 #import "CTUser.h"
 #import "CTGame.h"
 
-static NSString *const CTAPIBaseUrl = @"http://10.10.42.42:5000";
+static NSString *const CTAPIBaseUrl = @"http://10.10.43.17:5000";
 
 @implementation CTNetworkService
 

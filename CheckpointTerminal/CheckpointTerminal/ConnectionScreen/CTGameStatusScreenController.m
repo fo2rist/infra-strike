@@ -10,28 +10,39 @@
 
 #import "CTNetworkService.h"
 #import "CTGame.h"
+#import "CTUser.h"
 
 #import "CTRepeatTimer.h"
 
-@interface CTGameStatusScreenController ()
+@interface CTGameStatusScreenController () <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, copy) NSArray *users;
 @property (nonatomic, strong) CTRepeatTimer *repeatTimer;
 
+@property (nonatomic, weak) IBOutlet NSTextField *gameNameLabel;
 @property (nonatomic, weak) IBOutlet NSButton *gameStateChangeButton;
 
 @end
 
 @implementation CTGameStatusScreenController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+}
+
 - (void)viewWillAppear {
     [super viewWillAppear];
     [self startPolling];
+    
+    self.gameNameLabel.stringValue = self.game.gameName;
+    
 }
 
 - (void)viewWillDisappear {
     [super viewWillDisappear];
     [self stopPolling];
+    
 }
 
 #pragma mark - Accessors
@@ -130,6 +141,26 @@
                                                     }
                                                 }];
     }
+}
+
+#pragma mark - NSTableViewDataSource Methods
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return self.game.participants.count;
+}
+
+- (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row {
+    CTUser *user = [self.game.participants objectAtIndex:row];
+    if (tableView.tableColumns[0] == tableColumn) {
+        return user.name;
+    }
+    else if (tableView.tableColumns[1] == tableColumn) {
+        return user.kills;
+    }
+    else if (tableView.tableColumns[2] == tableColumn){
+        return user.deaths;
+    }
+    return nil;
 }
 
 @end
