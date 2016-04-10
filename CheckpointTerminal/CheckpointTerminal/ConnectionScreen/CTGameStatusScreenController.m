@@ -14,13 +14,18 @@
 
 #import "CTRepeatTimer.h"
 
+#import "CTArduinoService.h"
+
 @interface CTGameStatusScreenController () <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, copy) NSArray *users;
 @property (nonatomic, strong) CTRepeatTimer *repeatTimer;
+@property (nonatomic, strong) NSString *cachedGameName;
 
 @property (nonatomic, weak) IBOutlet NSTextField *gameNameLabel;
+@property (nonatomic, weak) IBOutlet NSTextField *gameOwnerName;
 @property (nonatomic, weak) IBOutlet NSButton *gameStateChangeButton;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
 @end
 
@@ -35,13 +40,25 @@
     [super viewWillAppear];
     [self startPolling];
     
-    self.gameNameLabel.stringValue = self.game.gameName;
+    self.gameNameLabel.stringValue = self.cachedGameName;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:CTArduinoServiceIRCodeReceivedEvent
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [[CTNetworkService sharedService] shootWithGameName:self.cachedGameName
+                                                                                                     code:note.userInfo[@"code"]
+                                                                                               completion:^(BOOL success, id data, NSError *error) {
+                                                                                                   
+                                                                                               }];
+                                                  }];
     
 }
 
 - (void)viewWillDisappear {
     [super viewWillDisappear];
     [self stopPolling];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -60,23 +77,16 @@
                     [self stopPolling];
                 }
                 else {
-                    NSAlert *alert = [NSAlert alertWithError:error];
-                    [alert runModal];
+//                    NSAlert *alert = [NSAlert alertWithError:error];
+//                    [alert runModal];
                 }
             }
         };
         
         _repeatTimer = [[CTRepeatTimer alloc] initWithRepeatInterval:10.0
                                                          tickHandler:^{
-                                                             [[CTNetworkService sharedService] gameWithName:self.game.gameName
+                                                             [[CTNetworkService sharedService] gameWithName:self.cachedGameName
                                                                                                  completion:completion];
-                                                             
-                                                             [[CTNetworkService sharedService] shootWithGameName:self.game.gameName
-                                                                                                            code:@"0xFFFFFF"
-                                                                                                      completion:^(BOOL success, id data, NSError *error) {
-                                                                                                          
-                                                                                                      }];
-                                                             
                                                          }];
         
     }
@@ -86,6 +96,9 @@
 
 - (void)setGame:(CTGame *)game {
     _game = game;
+    if (game.gameName.length > 0) {
+        self.cachedGameName = game.gameName;
+    }
     [self updateViews];
     if ([game.state isEqualToString:CTStatePending]) {
         self.gameStateChangeButton.image = [NSImage imageNamed:@"PlayButtonBG"];
@@ -101,7 +114,10 @@
 #pragma mark - Private
 
 - (void)updateViews {
-    
+    [self.tableView reloadData];
+    if (self.game.ownerName) {
+        self.gameOwnerName.stringValue = self.game.ownerName;
+    }
 }
 
 - (void)startPolling {
@@ -117,10 +133,11 @@
 - (IBAction)onChangeGameStateButtonClick:(NSButton *)sender {
     NSString *state = self.game.state;
     if ([state isEqualToString:CTStatePending]) {
-        [[CTNetworkService sharedService] startGameWithName:self.game.gameName
+        [[CTNetworkService sharedService] startGameWithName:self.cachedGameName
                                                  completion:^(BOOL success, CTGame *game, NSError *error) {
                                                      if (success && game) {
                                                          self.game = game;
+                                                         [[CTArduinoService sharedService] connect];
                                                      }
                                                      else if (error) {
                                                          NSAlert *alert = [NSAlert alertWithError:error];
@@ -129,11 +146,12 @@
                                                  }];
     }
     else if ([state isEqualToString:CTStateInProgress]) {
-        [[CTNetworkService sharedService] stopGameWithName:self.game.gameName
+        [[CTNetworkService sharedService] stopGameWithName:self.cachedGameName
                                                 completion:^(BOOL success, CTGame *game, NSError *error) {
                                                     if (success && game) {
                                                         self.game = game;
                                                         [self stopPolling];
+                                                        [[CTArduinoService sharedService] disconnect];
                                                     }
                                                     else if (error) {
                                                         NSAlert *alert = [NSAlert alertWithError:error];
@@ -155,12 +173,16 @@
         return user.name;
     }
     else if (tableView.tableColumns[1] == tableColumn) {
-        return user.kills;
+        return user.kills.stringValue ? user.kills.stringValue : @"0";
     }
     else if (tableView.tableColumns[2] == tableColumn){
-        return user.deaths;
+        return user.deaths.stringValue ? user.deaths.stringValue : @"0";
     }
     return nil;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    return 100.0;
 }
 
 @end

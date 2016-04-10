@@ -31,11 +31,10 @@
 }
 
 - (void)applicationWillBecomeActive:(NSNotification *)notification {
-    [[CTArduinoService sharedService] connect];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
-    [[CTArduinoService sharedService] disconnect];
+//    [[CTArduinoService sharedService] disconnect];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {

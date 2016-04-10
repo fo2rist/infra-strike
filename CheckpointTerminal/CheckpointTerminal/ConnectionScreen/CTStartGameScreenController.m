@@ -12,6 +12,8 @@
 #import "CTSession.h"
 #import "CTNetworkService.h"
 
+#import "CTArduinoService.h"
+
 @interface CTStartGameScreenController ()
 
 @property (nonatomic, weak) IBOutlet NSTextField *userNameTextField;
@@ -33,8 +35,8 @@
         self.gameNameTextField.stringValue) {
         [[CTNetworkService sharedService] createNewGameWithName:self.gameNameTextField.stringValue
                                                     creatorName:self.userNameTextField.stringValue
-                                                           mode:@"deathmatch"
-                                                           code:@"0xFFFFFF"
+                                                           mode:@"check point"
+                                                           code:@"00000000"
                                                      completion:^(BOOL success, CTGame *game, NSError *error) {
                                                          if (success) {
                                                              [[CTAppDelegate sharedInstance] openGameStatusScreenWithGame:game];

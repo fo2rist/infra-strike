@@ -16,6 +16,8 @@
 @property (nonatomic, copy) NSNumber *kills;
 @property (nonatomic, copy) NSNumber *deaths;
 
+@property (nonatomic, copy) NSNumber *secondsCaptured;
+
 + (CTUser *)userWithJSON:(NSDictionary *)json;
 
 @end

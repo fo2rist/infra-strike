@@ -18,6 +18,7 @@ extern NSString *const CTStateFinished;
 @property (nonatomic, copy) NSString *mode;
 @property (nonatomic, copy) NSString *state;
 @property (nonatomic, copy) NSString *ownerPhoneNumber;
+@property (nonatomic, copy) NSString *ownerName;
 
 @property (nonatomic, copy) NSArray *participants;
 

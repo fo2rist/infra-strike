@@ -26,6 +26,7 @@ NSString *const CTStateFinished = @"finished";
     game.mode = NilIfNull([json objectForKey:@"mode"]);
     game.state = NilIfNull([json objectForKey:@"state"]);
     game.ownerPhoneNumber = NilIfNull([json objectForKey:@""]);
+    game.ownerName = NilIfNull([json objectForKey:@"owner"]);
     
     NSArray *participantsJSON = NilIfNull([json objectForKey:@"participants"]);
     NSMutableArray *participants = [NSMutableArray array];

@@ -29,6 +29,7 @@
     NSRange titleRange = NSMakeRange(0, [colorTitle length]);
     [colorTitle addAttribute:NSForegroundColorAttributeName value:color range:titleRange];
     [self.registerButton setAttributedTitle:colorTitle];
+    
 }
 
 #pragma mark - Private Methods
