@@ -17,9 +17,15 @@
     <!--String related to game -->
     <string name="death_match">Death Match</string>
     <string name="team_death_match">Team Death Match</string>
+    <string name="check_point_defence">Check Point Defence</string>
     <string name="prompt_game_name">Game Name</string>
     <string name="unable_to_create_game">Unable to create the game</string>
     <string name="prompt_user_name">Your Name</string>
     <string name="unable_to_join_game">Unable to join the game</string>
+    <string name="select_name_and_scan_your_code">Select Name and Scan your Code</string>
+    <string name="ir_code">IR code:</string>
+    <string name="select_bt_device">Select BT device</string>
+    <string name="unable_to_connect_bt">Not Bluetooth device connected to play</string>
+    <string name="select_name_and_scan_ir">Select Name and Scan IR</string>
 
 </resources>

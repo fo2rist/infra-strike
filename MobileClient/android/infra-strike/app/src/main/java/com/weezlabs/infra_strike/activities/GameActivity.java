@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.weezlabs.infra_strike.R;
+import com.weezlabs.infra_strike.datalayer.BtManager;
 import com.weezlabs.infra_strike.datalayer.GameManager;
 import com.weezlabs.infra_strike.models.Game;
 import com.weezlabs.infra_strike.models.User;
@@ -38,6 +39,27 @@ public class GameActivity extends AppCompatActivity {
         leaveButton = findViewById(R.id.leave_game_button);
         startButton = findViewById(R.id.start_game_button);
         stopButton = findViewById(R.id.stop_game_button);
+
+        BtManager.beginListenForData(GameManager.getInstance().getGameDevice(), new BtManager.OnGetDataListener() {
+            @Override
+            public void onGotData(String data) {
+                GameManager.getInstance().reportShot(data)
+                        .subscribe(
+                                new Action1<Void>() {
+                                    @Override
+                                    public void call(Void aVoid) {
+
+                                    }
+                                },
+                                new Action1<Throwable>() {
+                                    @Override
+                                    public void call(Throwable throwable) {
+
+                                    }
+                                }
+                        );
+            }
+        });
     }
 
     @Override
@@ -51,6 +73,12 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         timer_.cancel();
+    }
+
+    @Override
+    protected void onStop() {
+        BtManager.closeBT();
+        super.onStop();
     }
 
     public void leaveGame(View sender) {
@@ -76,7 +104,6 @@ public class GameActivity extends AppCompatActivity {
                         new Action1<Void>() {
                             @Override
                             public void call(Void aVoid) {
-
                             }
                         },
                         new Action1<Throwable>() {
