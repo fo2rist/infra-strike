@@ -57,7 +57,7 @@
 
 - (void)viewWillDisappear {
     [super viewWillDisappear];
-    [self stopPolling];
+//    [self stopPolling];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
