@@ -129,19 +129,19 @@ Your Phone Number</string>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-LE-LAT">
                                 <rect key="frame" x="20" y="128" width="600" height="244"/>
                                 <clipView key="contentView" id="fqF-HH-Nej">
-                                    <rect key="frame" x="1" y="23" width="598" height="220"/>
+                                    <rect key="frame" x="1" y="0.0" width="598" height="243"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pQI-VH-S55" id="kUi-wq-lLf">
-                                            <rect key="frame" x="0.0" y="0.0" width="598" height="220"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="599" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="300" minWidth="40" maxWidth="1000" id="bjQ-NT-yqK">
+                                                <tableColumn width="400" minWidth="40" maxWidth="1000" id="bjQ-NT-yqK">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Users">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="system" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -152,7 +152,7 @@ Your Phone Number</string>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn width="95" minWidth="40" maxWidth="95" id="BSe-Pz-6PI">
+                                                <tableColumn width="95" minWidth="40" maxWidth="500" id="BSe-Pz-6PI">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Kills">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -165,26 +165,13 @@ Your Phone Number</string>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="95" minWidth="10" maxWidth="100" id="XM3-rJ-zx0">
+                                                <tableColumn identifier="" width="95" minWidth="10" maxWidth="500" id="XM3-rJ-zx0">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Deaths">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="2ik-Mf-G36">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                </tableColumn>
-                                                <tableColumn identifier="" width="95" minWidth="10" maxWidth="95" id="aSK-yZ-LQB">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Time Captured">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="HLT-wD-7W5">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -199,16 +186,16 @@ Your Phone Number</string>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.66642271958217547" horizontal="YES" id="akZ-vt-cUv">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="akZ-vt-cUv">
                                     <rect key="frame" x="1" y="227" width="598" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cdS-IM-ufn">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="cdS-IM-ufn">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="pQI-VH-S55">
-                                    <rect key="frame" x="0.0" y="0.0" width="598" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="599" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -229,7 +216,10 @@ Your Phone Number</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gameNameLabel" destination="orJ-w9-oIP" id="bsX-s1-ukF"/>
+                        <outlet property="gameOwnerName" destination="orJ-w9-oIP" id="k4A-DQ-tYL"/>
                         <outlet property="gameStateChangeButton" destination="dLx-9K-jC3" id="5op-IF-ddX"/>
+                        <outlet property="tableView" destination="kUi-wq-lLf" id="4qc-GE-8OZ"/>
                     </connections>
                 </viewController>
                 <customObject id="ygy-jX-lw8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

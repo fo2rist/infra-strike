@@ -25,7 +25,8 @@
 
 - (NSProgressIndicator *)progressIndicator {
     if (!_progressIndicator) {
-
+        _progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0.0, 0.0, 30.0, 30.0)];
+        _progressIndicator.style = NSProgressIndicatorSpinningStyle;
     }
     return _progressIndicator;
 }

@@ -17,9 +17,12 @@
     }
     
     CTUser *user = [[CTUser alloc] init];
-    user.name = [json objectForKey:@"name"];
-    user.code = [json objectForKey:@"code"];
-    user.phone = [json objectForKey:@"phone"];
+    user.name = NilIfNull([json objectForKey:@"name"]);
+    user.code = NilIfNull([json objectForKey:@"code"]);
+    user.phone = NilIfNull([json objectForKey:@"phone"]);
+    user.kills = NilIfNull([json objectForKey:@"frags"]);
+    user.deaths = NilIfNull([json objectForKey:@"deaths"]);
+    
     user.secondsCaptured = @(0);
     
     return user;

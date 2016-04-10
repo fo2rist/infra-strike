@@ -31,13 +31,12 @@
 }
 
 - (IBAction)onPlayButtonClick:(NSButton *)sender {
-        [[CTArduinoService sharedService] connect];
     if (self.userNameTextField.stringValue &&
         self.gameNameTextField.stringValue) {
         [[CTNetworkService sharedService] createNewGameWithName:self.gameNameTextField.stringValue
                                                     creatorName:self.userNameTextField.stringValue
-                                                           mode:@"deathmatch"
-                                                           code:@"0xFFFFFF"
+                                                           mode:@"check point"
+                                                           code:@"00000000"
                                                      completion:^(BOOL success, CTGame *game, NSError *error) {
                                                          if (success) {
                                                              [[CTAppDelegate sharedInstance] openGameStatusScreenWithGame:game];
