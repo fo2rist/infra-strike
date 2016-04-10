@@ -1,10 +1,12 @@
 package com.weezlabs.infra_strike.datalayer;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.weezlabs.infra_strike.models.Game;
 import com.weezlabs.infra_strike.models.Account;
+import com.weezlabs.infra_strike.models.Shot;
 import com.weezlabs.infra_strike.models.User;
 import com.weezlabs.infra_strike.network.InfraStrikeService;
 import com.weezlabs.infra_strike.network.InfraStrikeServiceBuilder;
@@ -31,6 +33,7 @@ public class GameManager {
     private String uid_ = "";
     private String currentGame_ = "";
     private String userPhone_ = "";
+    BluetoothDevice connectedDevice_ = null;
 
     private Context context_;
 
@@ -42,12 +45,20 @@ public class GameManager {
     }
 
     private GameManager() {
-        service_ = InfraStrikeServiceBuilder.build("http://10.10.42.42:5000/");
+        service_ = InfraStrikeServiceBuilder.build("http://10.10.43.17:5000/");
     }
 
     public void intialize(Context context) {
         context_ = context;
         restore();
+    }
+
+    public void setGameDevice(BluetoothDevice bluetoothDevice) {
+        connectedDevice_ = bluetoothDevice;
+    }
+
+    public BluetoothDevice getGameDevice() {
+        return connectedDevice_;
     }
 
     public Observable<Account> signup(Account me) {
@@ -129,6 +140,12 @@ public class GameManager {
         }
 
         return service_.getGameInfo(uid_, currentGame_)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<Void> reportShot(String code) {
+        return service_.reportShot(uid_, currentGame_, new Shot(code))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread());
     }

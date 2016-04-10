@@ -93,6 +93,9 @@ public class CreateGameActivity extends AppCompatActivity {
             case R.id.team_death_match_radiobutton:
                 gameType = "teamdeathmatch";
                 break;
+            case R.id.check_point_radiobutton:
+                gameType = "check point";
+                break;
             case R.id.death_match_radiobutton:
             default:
                 gameType = "deathmatch";

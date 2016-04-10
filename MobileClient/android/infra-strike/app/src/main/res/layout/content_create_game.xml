@@ -64,6 +64,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/team_death_match"/>
+        <RadioButton
+            android:id="@+id/check_point_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_point_defence"/>
     </RadioGroup>
 
     <TextView
