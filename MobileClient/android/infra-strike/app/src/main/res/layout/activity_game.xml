@@ -47,6 +47,16 @@
             android:layout_height="match_parent"
             android:text="Stop"
             android:onClick="leaveGame"/>
+        <TextView
+            android:id="@+id/dead_status"
+            android:text="DEAD"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:visibility="gone"/>
     </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,11 +19,14 @@ import java.util.UUID;
  */
 public class BtManager {
 
+
     public interface OnGetDataListener {
         void onGotData(String data);
     }
 
-    private static String currentIdCode_ = "";
+    private static String currentIrCode_ = "";
+    private static BluetoothDevice currentDevice_;
+    private static OnGetDataListener currentListener_;
 
     static Thread workerThread_;
     static byte[] readBuffer_;
@@ -51,22 +55,26 @@ public class BtManager {
         }
     }
 
-    public static String getCurrentIdCode() {
-        return currentIdCode_;
+    public static String getCurrentIrCode() {
+        return currentIrCode_;
     }
 
     private static BluetoothAdapter getAdapter() {
         return BluetoothAdapter.getDefaultAdapter();
     }
 
-    public static void beginListenForData(BluetoothDevice device, final OnGetDataListener listener) {
+    public static void beginListenForData(BluetoothDevice device, OnGetDataListener listener) {
+        currentDevice_ = device;
+        currentListener_ = listener;
+
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         try {
-            mmSocket_ = device.createRfcommSocketToServiceRecord(uuid);
+            mmSocket_ = currentDevice_.createRfcommSocketToServiceRecord(uuid);
             mmSocket_.connect();
             mmInputStream_ = mmSocket_.getInputStream();
         } catch (IOException e) {
             //OMG!
+            Log.e("IRS", "failed to start");
             closeBT();
             return;
         }
@@ -96,8 +104,8 @@ public class BtManager {
                                     if (data.length() > 7 && data.length() <10 && !data.startsWith("FFFFFFFF")) {
                                         handler.post(new Runnable() {
                                             public void run() {
-                                                currentIdCode_ = data;
-                                                listener.onGotData(data);
+                                                currentIrCode_ = data.trim().substring(0, 7);
+                                                currentListener_.onGotData(currentIrCode_);
                                             }
                                         });
                                     }
@@ -108,6 +116,7 @@ public class BtManager {
                         }
                     } catch (IOException ex) {
                         stopWorker_ = true;
+                        Log.e("IRS", "failed to read");
                     }
                 }
             }
@@ -124,6 +133,33 @@ public class BtManager {
             }
         } catch (IOException e) {
             //Ohhhh nooo!
+            Log.e("IRS", "failed to stop");
+        }
+    }
+
+    public static String keepAlive() {
+        if (mmSocket_ == null) {
+            return "No socket";
+        }
+
+        if (mmInputStream_ == null) {
+            return "No stream";
+        }
+
+        if (workerThread_ == null) {
+            return "No thread";
+        }
+
+        try {
+            if (mmInputStream_.available()>0) {
+                return "available data";
+            } else {
+                return "no data";
+            }
+        } catch (IOException e) {
+            closeBT();
+            beginListenForData(currentDevice_, currentListener_);
+            return "Socket Error";
         }
     }
 }

@@ -1,14 +1,12 @@
 package com.weezlabs.infra_strike.dialogs;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,9 +15,6 @@ import android.widget.TextView;
 
 import com.weezlabs.infra_strike.R;
 import com.weezlabs.infra_strike.datalayer.BtManager;
-import com.weezlabs.infra_strike.datalayer.GameManager;
-
-import java.util.zip.Inflater;
 
 /**
  * Created by WeezLabs on 4/9/16.
@@ -66,19 +61,19 @@ public class GetNameAndCodeDialog  extends AlertDialog {
 
             @Override
             public void afterTextChanged(Editable s) {
-                buttonOk.setEnabled(!s.toString().isEmpty() && !BtManager.getCurrentIdCode().isEmpty());
+                buttonOk.setEnabled(!s.toString().isEmpty() && !BtManager.getCurrentIrCode().isEmpty());
             }
         });
 
         nameEdit.setText("Palladin2001");
-        irCodeText.setText(getContext().getText(R.string.ir_code) + BtManager.getCurrentIdCode());
+        irCodeText.setText(getContext().getText(R.string.ir_code) + BtManager.getCurrentIrCode());
 
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BtManager.closeBT();
                 dismiss();
-                listener_.finished(nameEdit.getText().toString(), BtManager.getCurrentIdCode());
+                listener_.finished(nameEdit.getText().toString(), BtManager.getCurrentIrCode());
             }
         });
 
@@ -102,7 +97,7 @@ public class GetNameAndCodeDialog  extends AlertDialog {
             @Override
             public void onGotData(String data) {
                 irCodeText.setText(getContext().getText(R.string.ir_code) + data);
-                buttonOk.setEnabled(!nameEdit.getText().toString().isEmpty() && !BtManager.getCurrentIdCode().isEmpty());
+                buttonOk.setEnabled(!nameEdit.getText().toString().isEmpty() && !BtManager.getCurrentIrCode().isEmpty());
             }
         });
     }

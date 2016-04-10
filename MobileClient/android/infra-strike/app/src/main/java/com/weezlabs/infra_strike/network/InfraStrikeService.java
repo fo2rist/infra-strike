@@ -3,6 +3,7 @@ package com.weezlabs.infra_strike.network;
 import com.weezlabs.infra_strike.models.Game;
 import com.weezlabs.infra_strike.models.Account;
 import com.weezlabs.infra_strike.models.Shot;
+import com.weezlabs.infra_strike.models.ShotResult;
 import com.weezlabs.infra_strike.models.User;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public interface InfraStrikeService {
     Observable<Game> getGameInfo(@Header("uid") String userid, @Path("gameName") String gameName);
 
     @POST("games/{gameName}/shots")
-    Observable<Void> reportShot(@Header("uid") String userid, @Path("gameName") String gameName, @Body Shot shot);
+    Observable<ShotResult> reportShot(@Header("uid") String userid, @Path("gameName") String gameName, @Body Shot shot);
 
 
     //temp before we get push notifications
