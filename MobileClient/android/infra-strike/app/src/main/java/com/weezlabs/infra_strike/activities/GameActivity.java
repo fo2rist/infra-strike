@@ -1,17 +1,19 @@
 package com.weezlabs.infra_strike.activities;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.weezlabs.infra_strike.R;
 import com.weezlabs.infra_strike.datalayer.BtManager;
 import com.weezlabs.infra_strike.datalayer.GameManager;
 import com.weezlabs.infra_strike.models.Game;
+import com.weezlabs.infra_strike.models.ShotResult;
 import com.weezlabs.infra_strike.models.User;
 
 import java.util.Timer;
@@ -27,6 +29,11 @@ public class GameActivity extends AppCompatActivity {
     private View leaveButton;
     private View startButton;
     private View stopButton;
+    private TextView statusView;
+    private View deadStatusView;
+
+    MediaPlayer mpHeadShot_;
+    MediaPlayer mpSomeShot_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +46,33 @@ public class GameActivity extends AppCompatActivity {
         leaveButton = findViewById(R.id.leave_game_button);
         startButton = findViewById(R.id.start_game_button);
         stopButton = findViewById(R.id.stop_game_button);
+        statusView = (TextView) findViewById(R.id.status);
+        deadStatusView = findViewById(R.id.dead_status);
+
+        mpHeadShot_ = MediaPlayer.create(this, R.raw.headshot);
+        mpSomeShot_ = MediaPlayer.create(this, R.raw.shot);
 
         BtManager.beginListenForData(GameManager.getInstance().getGameDevice(), new BtManager.OnGetDataListener() {
             @Override
             public void onGotData(String data) {
-                GameManager.getInstance().reportShot(data)
-                        .subscribe(
-                                new Action1<Void>() {
-                                    @Override
-                                    public void call(Void aVoid) {
 
-                                    }
-                                },
-                                new Action1<Throwable>() {
-                                    @Override
-                                    public void call(Throwable throwable) {
-
-                                    }
+                GameManager.getInstance().reportShot(data).subscribe(
+                        new Action1<ShotResult>() {
+                            @Override
+                            public void call(ShotResult shotResult) {
+                                if (ShotResult.SHOT_RESULT_KILLED.equals(shotResult.result)) {
+                                    mpHeadShot_.start();
+                                } else {
+                                    mpSomeShot_.start();
                                 }
-                        );
+                            }
+                        },
+                        new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                            }
+                        }
+                );
             }
         });
     }
@@ -93,6 +108,7 @@ public class GameActivity extends AppCompatActivity {
                         new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
+                                finish();
                             }
                         }
                 );
@@ -126,17 +142,33 @@ public class GameActivity extends AppCompatActivity {
                         new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
-
+                                updateUiForDeadGame();
                             }
                         });
     }
 
+    private void updateUiForDeadGame() {
+        getSupportActionBar().setTitle("Game is over");
+    }
+
     private void updateUiByGameState(Game game) {
-        getSupportActionBar().setTitle(game.name);
+        /*DEBUG*/testBt(null);
+
+        getSupportActionBar().setTitle(game.name + " is " + game.state);
+
+        User me = null;
+        for (User user: game.participants) {
+            if (user.phone.equals(GameManager.getInstance().getUserPhone())) {
+                me = user;
+            }
+        }
 
         usersListView.setAdapter(new ArrayAdapter<User>(GameActivity.this,
                 android.R.layout.simple_list_item_1,
                 game.participants));
+
+
+        deadStatusView.setVisibility(me.dead ? View.VISIBLE : View.GONE);
 
         switch (game.state) {
             case Game.GAME_STATE_FINISHED:
@@ -166,6 +198,12 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 getGameInfo();
-            } };
+            }
+        };
+    }
+
+    public void testBt(View view) {
+        String status = BtManager.keepAlive();
+        statusView.setText("Status: " + status + " Last: " + GameManager.getInstance().getLastShot());
     }
 }

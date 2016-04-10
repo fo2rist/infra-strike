@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.weezlabs.infra_strike.models.Game;
 import com.weezlabs.infra_strike.models.Account;
 import com.weezlabs.infra_strike.models.Shot;
+import com.weezlabs.infra_strike.models.ShotResult;
 import com.weezlabs.infra_strike.models.User;
 import com.weezlabs.infra_strike.network.InfraStrikeService;
 import com.weezlabs.infra_strike.network.InfraStrikeServiceBuilder;
@@ -33,6 +34,7 @@ public class GameManager {
     private String uid_ = "";
     private String currentGame_ = "";
     private String userPhone_ = "";
+    private String lastShot_ = "";
     BluetoothDevice connectedDevice_ = null;
 
     private Context context_;
@@ -46,6 +48,7 @@ public class GameManager {
 
     private GameManager() {
         service_ = InfraStrikeServiceBuilder.build("http://10.10.43.17:5000/");
+//        service_ = InfraStrikeServiceBuilder.build("https://fierce-fortress-23689.herokuapp.com/");
     }
 
     public void intialize(Context context) {
@@ -144,7 +147,8 @@ public class GameManager {
                 .subscribeOn(Schedulers.newThread());
     }
 
-    public Observable<Void> reportShot(String code) {
+    public Observable<ShotResult> reportShot(String code) {
+        lastShot_ = code;
         return service_.reportShot(uid_, currentGame_, new Shot(code))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread());
@@ -171,6 +175,10 @@ public class GameManager {
 
     public String getUserPhone() {
         return userPhone_;
+    }
+
+    public String getLastShot() {
+        return lastShot_;
     }
 
     public void logout() {

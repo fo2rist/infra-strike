@@ -9,6 +9,13 @@
     tools:context="com.weezlabs.infra_strike.activities.GameActivity"
     tools:showIn="@layout/activity_game">
 
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BT STATUS OK"
+        android:onClick="testBt"/>
     <ListView
         android:id="@+id/users_list"
         android:layout_width="match_parent"

@@ -15,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.weezlabs.infra_strike.R;
+import com.weezlabs.infra_strike.datalayer.BtManager;
 import com.weezlabs.infra_strike.datalayer.GameManager;
 import com.weezlabs.infra_strike.models.Game;
 
@@ -30,6 +32,9 @@ public class CreateGameActivity extends AppCompatActivity {
     private EditText userNameText;
     private RadioGroup gameTypesRadioGroup;
     private Spinner respawnTimeSpinner;
+    private TextView irCodeText_;
+
+    private String irCode_ = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class CreateGameActivity extends AppCompatActivity {
         userNameText = (EditText) findViewById(R.id.user_name_text);
         gameTypesRadioGroup = (RadioGroup) findViewById(R.id.game_types_radio_group);
         respawnTimeSpinner = (Spinner) findViewById(R.id.respawn_time_spinner);
+        irCodeText_ = (TextView) findViewById(R.id.ir_code);
 
         //Populate respawn time spinner
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
@@ -54,6 +60,14 @@ public class CreateGameActivity extends AppCompatActivity {
         adapter.add(30);
         adapter.add(60);
         respawnTimeSpinner.setAdapter(adapter);
+
+        BtManager.beginListenForData(GameManager.getInstance().getGameDevice(), new BtManager.OnGetDataListener() {
+            @Override
+            public void onGotData(String data) {
+                irCodeText_.setText(getText(R.string.ir_code) + data);
+                irCode_ = data;
+            }
+        });
     }
 
     public void createGame(View view) {
@@ -102,7 +116,7 @@ public class CreateGameActivity extends AppCompatActivity {
                 break;
 
         }
-        Game game = new Game(gameName, userName, gameType, "141", respawnTime);
+        Game game = new Game(gameName, userName, gameType, irCode_, respawnTime);
         GameManager.getInstance().createGame(game).subscribe(
                 new Action1<Game>() {
                     @Override
