@@ -126,9 +126,9 @@ Your Phone Number</string>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-LE-LAT">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-LE-LAT">
                                 <rect key="frame" x="20" y="128" width="600" height="244"/>
-                                <clipView key="contentView" ambiguous="YES" id="fqF-HH-Nej">
+                                <clipView key="contentView" id="fqF-HH-Nej">
                                     <rect key="frame" x="1" y="23" width="598" height="220"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -139,7 +139,7 @@ Your Phone Number</string>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="400" minWidth="40" maxWidth="1000" id="bjQ-NT-yqK">
+                                                <tableColumn width="300" minWidth="40" maxWidth="1000" id="bjQ-NT-yqK">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Users">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -165,13 +165,26 @@ Your Phone Number</string>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="64" minWidth="10" maxWidth="95" id="XM3-rJ-zx0">
+                                                <tableColumn identifier="" width="95" minWidth="10" maxWidth="100" id="XM3-rJ-zx0">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Deaths">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="2ik-Mf-G36">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn identifier="" width="95" minWidth="10" maxWidth="95" id="aSK-yZ-LQB">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Time Captured">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="HLT-wD-7W5">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -186,7 +199,7 @@ Your Phone Number</string>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="akZ-vt-cUv">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.66642271958217547" horizontal="YES" id="akZ-vt-cUv">
                                     <rect key="frame" x="1" y="227" width="598" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -202,10 +215,14 @@ Your Phone Number</string>
                         </subviews>
                         <constraints>
                             <constraint firstItem="orJ-w9-oIP" firstAttribute="centerX" secondItem="uZP-HB-Dtb" secondAttribute="centerX" id="4FT-pw-TfU"/>
+                            <constraint firstAttribute="trailing" secondItem="lUS-LE-LAT" secondAttribute="trailing" constant="20" id="7d2-q2-gF2"/>
+                            <constraint firstItem="lUS-LE-LAT" firstAttribute="top" secondItem="orJ-w9-oIP" secondAttribute="bottom" constant="8" id="DsZ-ls-MPe"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="height" secondItem="uZP-HB-Dtb" secondAttribute="height" id="Gjh-uA-wbc"/>
+                            <constraint firstItem="lUS-LE-LAT" firstAttribute="leading" secondItem="uZP-HB-Dtb" secondAttribute="leading" constant="20" id="Pp8-9D-iVb"/>
                             <constraint firstItem="orJ-w9-oIP" firstAttribute="top" secondItem="uZP-HB-Dtb" secondAttribute="top" constant="51" id="QQn-ux-32m"/>
                             <constraint firstAttribute="bottom" secondItem="dLx-9K-jC3" secondAttribute="bottom" constant="20" id="VIQ-7m-dib"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="centerX" secondItem="uZP-HB-Dtb" secondAttribute="centerX" id="WFj-mV-tcU"/>
+                            <constraint firstItem="dLx-9K-jC3" firstAttribute="top" secondItem="lUS-LE-LAT" secondAttribute="bottom" constant="8" id="WSV-Zn-f39"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="centerY" secondItem="uZP-HB-Dtb" secondAttribute="centerY" id="bJp-gE-Yvi"/>
                             <constraint firstItem="TTo-VV-69J" firstAttribute="width" secondItem="uZP-HB-Dtb" secondAttribute="width" id="fdf-zr-adx"/>
                             <constraint firstAttribute="trailing" secondItem="dLx-9K-jC3" secondAttribute="trailing" constant="20" id="yv5-ee-ucY"/>

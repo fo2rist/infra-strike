@@ -14,6 +14,8 @@
 
 #import "CTRepeatTimer.h"
 
+#import "CTArduinoService.h"
+
 @interface CTGameStatusScreenController () <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, copy) NSArray *users;
@@ -37,11 +39,23 @@
     
     self.gameNameLabel.stringValue = self.game.gameName;
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:CTArduinoServiceIRCodeReceivedEvent
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [[CTNetworkService sharedService] shootWithGameName:self.game.gameName
+                                                                                                     code:note.userInfo[@"code"]
+                                                                                               completion:^(BOOL success, id data, NSError *error) {
+                                                                                                   
+                                                                                               }];
+                                                  }];
+    
 }
 
 - (void)viewWillDisappear {
     [super viewWillDisappear];
     [self stopPolling];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -70,13 +84,6 @@
                                                          tickHandler:^{
                                                              [[CTNetworkService sharedService] gameWithName:self.game.gameName
                                                                                                  completion:completion];
-                                                             
-                                                             [[CTNetworkService sharedService] shootWithGameName:self.game.gameName
-                                                                                                            code:@"0xFFFFFF"
-                                                                                                      completion:^(BOOL success, id data, NSError *error) {
-                                                                                                          
-                                                                                                      }];
-                                                             
                                                          }];
         
     }
@@ -155,10 +162,10 @@
         return user.name;
     }
     else if (tableView.tableColumns[1] == tableColumn) {
-        return user.kills;
+        return user.kills.stringValue ? user.kills.stringValue : @"0";
     }
     else if (tableView.tableColumns[2] == tableColumn){
-        return user.deaths;
+        return user.deaths.stringValue ? user.deaths.stringValue : @"0";
     }
     return nil;
 }

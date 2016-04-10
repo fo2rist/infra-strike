@@ -20,6 +20,7 @@
     user.name = [json objectForKey:@"name"];
     user.code = [json objectForKey:@"code"];
     user.phone = [json objectForKey:@"phone"];
+    user.secondsCaptured = @(0);
     
     return user;
     

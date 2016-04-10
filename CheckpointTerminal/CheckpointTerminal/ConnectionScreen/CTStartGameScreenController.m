@@ -12,6 +12,8 @@
 #import "CTSession.h"
 #import "CTNetworkService.h"
 
+#import "CTArduinoService.h"
+
 @interface CTStartGameScreenController ()
 
 @property (nonatomic, weak) IBOutlet NSTextField *userNameTextField;
@@ -29,6 +31,7 @@
 }
 
 - (IBAction)onPlayButtonClick:(NSButton *)sender {
+        [[CTArduinoService sharedService] connect];
     if (self.userNameTextField.stringValue &&
         self.gameNameTextField.stringValue) {
         [[CTNetworkService sharedService] createNewGameWithName:self.gameNameTextField.stringValue

@@ -17,6 +17,7 @@ NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
 @interface CTArduinoService () <ORSSerialPortDelegate>
 
 @property (nonatomic, strong) ORSSerialPort *serialPort;
+@property (nonatomic, strong) NSMutableString *stringAccum;
 
 @end
 
@@ -35,7 +36,7 @@ NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
 
 - (ORSSerialPort *)serialPort {
     if (!_serialPort) {
-        _serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.HC-06-DevB"];
+        _serialPort = [ORSSerialPort serialPortWithPath:@"/dev/cu.usbserial-A603RPPP"];
         _serialPort.baudRate = @(9600);
         _serialPort.delegate = self;
     }
@@ -63,17 +64,47 @@ NSString *const CTArduinoServicePortClosed = @"ArduinoServicePortClosed";
 }
 
 - (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data {
-    NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    NSLog(@"%@", decodedString);
+    NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([decodedString containsString:@"\r"]) {
+        NSRange range = [decodedString rangeOfString:@"\r"];
+        if (range.location > 0) {
+            [self.stringAccum appendString:[decodedString substringToIndex:range.location]];
+        }
+    }
+    else if (decodedString.length > 8) {
+        return;
+    }
+    else if (decodedString.length < 8)  {
+        if (!_stringAccum) {
+            self.stringAccum = [NSMutableString stringWithString:decodedString];
+            return;
+        }
+        else {
+            [_stringAccum appendString:decodedString];
+        }
+    }
+    else {
+        _stringAccum = [decodedString mutableCopy];
+    }
     
+    if (self.stringAccum.length >= 8) {
+        NSLog(@"%@", _stringAccum);
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:CTArduinoServiceIRCodeReceivedEvent
+                                                        object:nil
+                                                      userInfo:@{@"code" : NullIfNil(self.stringAccum)}];
+    _stringAccum = nil;
 }
 
 - (void)serialPortWasOpened:(ORSSerialPort *)serialPort {
     NSLog(@"Port opened");
+    [[NSNotificationCenter defaultCenter] postNotificationName:CTArduinoServicePortOpened object:nil];
 }
 
 - (void)serialPortWasClosed:(ORSSerialPort *)serialPort {
     NSLog(@"Port closed");
+    [[NSNotificationCenter defaultCenter] postNotificationName:CTArduinoServicePortClosed object:nil];
 }
 
 @end
